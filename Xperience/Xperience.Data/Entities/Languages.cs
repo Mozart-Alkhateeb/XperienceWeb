@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Xperience.Data.Entities
 {
-    public class SiteCategory
+    public class Languages
     {
         [Key()]
-        public int Id { get; set; }
+        public int User_id { get; set; }
         [Required]
-        [MaxLength(100)]
-        public string Description { get; set; }
+        public string Language { get; set; }
 
-        #region N.P
+        #region F.K
 
-        public ICollection<Site> Sites { get; set; }
+        [ForeignKey("User_id")]
+        public Users Languages_user_id { get; set; }
+
+
         #endregion
+
+
     }
 }

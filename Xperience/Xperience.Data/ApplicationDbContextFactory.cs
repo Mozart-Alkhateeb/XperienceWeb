@@ -12,7 +12,7 @@ namespace Xperience.Data
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             // this Connection string is not used to serve content to your users, this is here just to create table and the database
-            optionsBuilder.UseSqlServer("Server=.;Database=Xperience;User Id=sa;Password=P@ssw0rd");
+            optionsBuilder.UseSqlServer("Server=.;Database=XperienceDB;User Id=sa;Password=sql123");
 
             return new ApplicationDbContext(optionsBuilder.Options);
         }

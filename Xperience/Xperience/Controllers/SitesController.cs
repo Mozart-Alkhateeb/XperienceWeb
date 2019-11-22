@@ -23,14 +23,14 @@ namespace Xperience.Controllers
 
         // GET: api/Sites
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Site>>> GetSites()
+        public async Task<ActionResult<IEnumerable<Users>>> GetSites()
         {
             return await _context.Sites.ToListAsync();
         }
 
         // GET: api/Sites/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Site>> GetSite(int id)
+        public async Task<ActionResult<Users>> GetSite(int id)
         {
             var site = await _context.Sites.FindAsync(id);
 
@@ -46,7 +46,7 @@ namespace Xperience.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSite(int id, Site site)
+        public async Task<IActionResult> PutSite(int id, Users site)
         {
             if (id != site.Id)
             {
@@ -78,7 +78,7 @@ namespace Xperience.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Site>> PostSite(Site site)
+        public async Task<ActionResult<Users>> PostSite(Users site)
         {
             _context.Sites.Add(site);
             await _context.SaveChangesAsync();
@@ -88,7 +88,7 @@ namespace Xperience.Controllers
 
         // DELETE: api/Sites/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Site>> DeleteSite(int id)
+        public async Task<ActionResult<Users>> DeleteSite(int id)
         {
             var site = await _context.Sites.FindAsync(id);
             if (site == null)
