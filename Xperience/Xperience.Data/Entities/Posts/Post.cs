@@ -36,6 +36,13 @@ namespace Xperience.Data.Entities.Posts
         #region N.P
 
         public ICollection<PostReaction> PostReactions { get; set; }
+
+        public ICollection<ReportedPost> ReportedPosts { get; set; }
+        public ICollection<Comment> Comments { get; set; }
+
+
+        public ICollection<Tag> Tags { get; set; }
+      
         #endregion
     }
 }

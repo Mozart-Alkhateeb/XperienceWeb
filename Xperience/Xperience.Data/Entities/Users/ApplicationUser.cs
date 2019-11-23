@@ -45,8 +45,9 @@ namespace Xperience.Data.Entities.Users
         public ICollection<FollowedSite> FollowedSites { get; set; }
         public ICollection<UserInterest> UserInterests { get; set; }
         public ICollection<ConnectorLocation> ConnectorLocations { get; set; }
+        public ICollection<Post> Posts { get; set; }
         public ICollection<PostReaction> PostReactions { get; set; }
-
+        public ICollection<Comment> Comments { get; set; }
         public ICollection<Connection> ConnectedTo { get; set; }
         public ICollection<Connection> Connections { get; set; }
 

@@ -91,11 +91,31 @@ namespace Xperience.Data
                 .WithOne(q => q.Reported)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
+            //amena added 
+            modelBuilder.Entity<Post>()
+              .HasMany(q => q.ReportedPosts)
+              .WithOne(q => q.Post)
+              .OnDelete(DeleteBehavior.ClientCascade);
+
+            //amena added Delete Posts
+            modelBuilder.Entity<Site>()
+              .HasMany(q => q.Posts)
+              .WithOne(q => q.Site)
+              .OnDelete(DeleteBehavior.ClientCascade);
+
+            //amena added Delete Comments
+            modelBuilder.Entity<Post>()
+              .HasMany(q => q.Comments)
+              .WithOne(q => q.Post)
+              .OnDelete(DeleteBehavior.ClientCascade);
+
             // Delete UserNationalities
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany(q => q.UserNationalities)
                 .WithOne(q => q.ApplicationUser)
                 .OnDelete(DeleteBehavior.ClientCascade);
+
+
 
             // Delete UserLanguages
             modelBuilder.Entity<ApplicationUser>()
@@ -124,6 +144,8 @@ namespace Xperience.Data
                 .HasOne(q => q.Tagged)
                 .WithMany(q => q.TaggedBy)
                 .OnDelete(DeleteBehavior.ClientCascade);
+
+           
 
             // Delete Blocks
             modelBuilder.Entity<ApplicationUser>()
@@ -164,6 +186,12 @@ namespace Xperience.Data
                 .WithOne(q => q.ApplicationUser)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
+            //amena added Delete Followed Site
+            modelBuilder.Entity<Site>()
+                .HasMany(q => q.FollowedSites)
+                .WithOne(q => q.Site)
+                .OnDelete(DeleteBehavior.ClientCascade);
+
             //Delete UserInterests
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany(q => q.UserInterests)
@@ -184,6 +212,27 @@ namespace Xperience.Data
                 .HasMany(q => q.Ratings)
                 .WithOne(q => q.ApplicationUser)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+            //amena added Keep Posts
+          
+            modelBuilder.Entity<ApplicationUser>()
+             .HasMany(q => q.Posts)
+             .WithOne(q => q.ApplicationUser)
+             .OnDelete(DeleteBehavior.ClientSetNull);
+
+            //amena added Keep Comments
+
+            modelBuilder.Entity<ApplicationUser>()
+             .HasMany(q => q.Comments)
+             .WithOne(q => q.ApplicationUser)
+             .OnDelete(DeleteBehavior.ClientSetNull);
+
+            //amena added Keep Connector Locations
+
+            modelBuilder.Entity<Location>()
+             .HasMany(q => q.ConnectorLocations)
+             .WithOne(q => q.Location)
+             .OnDelete(DeleteBehavior.ClientSetNull);
 
             // Keep UserReviews
             modelBuilder.Entity<ApplicationUser>()
@@ -220,6 +269,14 @@ namespace Xperience.Data
                 .HasMany(q => q.ReportedPosts)
                 .WithOne(q => q.ApplicationUser)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+            //amena added Keep Posts
+            modelBuilder.Entity<Hashtag>()
+             .HasMany(q => q.Posts)
+             .WithOne(q => q.Hashtag)
+             .OnDelete(DeleteBehavior.ClientSetNull);
+
+
             #endregion
 
             #region Restrict Delete
@@ -228,6 +285,12 @@ namespace Xperience.Data
                 .HasMany(q => q.Sites)
                 .WithOne(q => q.Category)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            //amena added delete tags keep post
+            modelBuilder.Entity<Tag>()
+              .HasOne(q => q.Post)
+              .WithMany(q => q.Tags)
+              .OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder.Entity<Category>()
                 .HasMany(q => q.UserInterests)
@@ -263,6 +326,8 @@ namespace Xperience.Data
                 .HasMany(q => q.PostReactions)
                 .WithOne(q => q.Reaction)
                 .OnDelete(DeleteBehavior.Restrict);
+       
+
             #endregion
 
             #region Composite F.K
@@ -284,6 +349,7 @@ namespace Xperience.Data
             
             modelBuilder.Entity<ConnectorLocation>()
                 .HasKey(q => new { q.ApplicationUserId, q.LocationId});
+
             
             modelBuilder.Entity<FollowedSite>()
                 .HasKey(q => new { q.ApplicationUserId, q.SiteId});

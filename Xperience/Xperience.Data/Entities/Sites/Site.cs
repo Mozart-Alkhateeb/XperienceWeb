@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Xperience.Data.Entities.Config;
+using Xperience.Data.Entities.Posts;
 using Xperience.Data.Entities.Users;
 
 namespace Xperience.Data.Entities.Sites
@@ -40,6 +41,9 @@ namespace Xperience.Data.Entities.Sites
         public ICollection<UserSiteReview> UserSiteReviews { get; set; }
         public ICollection<SiteVote> SiteVotes { get; set; }
         public ICollection<ReportedSite> ReportedSites { get; set; }
+
+        public ICollection<FollowedSite> FollowedSites { get; set; }
+        public ICollection<Post> Posts { get; set; }
         #endregion
     }
 }

@@ -14,6 +14,8 @@ namespace Xperience.Data.Entities.Config
         #region N.P
 
         public ICollection<ApplicationUser> ApplicationUsers{ get; set; }
+
+        public ICollection<ConnectorLocation> ConnectorLocations { get; set; }
         public ICollection<Site> Sites { get; set; }
         #endregion
     }
