@@ -27,17 +27,26 @@ namespace Xperience
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-            services.AddRazorPages();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromDays(31);
+                options.Cookie.HttpOnly = true;
+                // Make the session cookie essential
+                options.Cookie.IsEssential = true;
+            });
+
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString(nameof(ApplicationDbContext)));
             });
 
-            services.AddDefaultIdentity<BaseUser>(options =>
+            services.AddIdentity<BaseUser, ApplicationRole>(options =>
                 {
                 })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -60,18 +69,27 @@ namespace Xperience
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings
-                //options.Cookie.HttpOnly = true;
+                options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(50);
 
                 options.LoginPath = "/Identity/Account/Login";
+                options.LogoutPath = "/Identity/Account/Logout";
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+
+            services.AddRazorPages().AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
+                options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
+            });
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseRouting();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -86,10 +104,16 @@ namespace Xperience
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseRouting();
+            
 
+            app.UseCookiePolicy();
+            app.UseAuthentication();
             app.UseAuthorization();
-            app.UseAuthorization();
+            app.UseSession(new SessionOptions()
+            {
+                IdleTimeout = TimeSpan.FromDays(31),
+            });
+            //app.UseHttpContextItemsMiddleware();
 
             app.UseEndpoints(endpoints =>
             {
