@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 
 namespace Xperience.Data
 {
@@ -10,9 +9,15 @@ namespace Xperience.Data
     {
         public ApplicationDbContext CreateDbContext(string[] args)
         {
+            // Build config
+            IConfiguration config = new ConfigurationBuilder()
+                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../Xperience"))
+                .AddJsonFile("appsettings.json")
+                .Build();
+            var connectionString = config.GetConnectionString(nameof(ApplicationDbContext));
+
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            // this Connection string is not used to serve content to your users, this is here just to create table and the database
-            optionsBuilder.UseSqlServer("Server=.;Database=XperienceDB;User Id=sa;Password=sql123");
+            optionsBuilder.UseSqlServer(connectionString);
 
             return new ApplicationDbContext(optionsBuilder.Options);
         }
