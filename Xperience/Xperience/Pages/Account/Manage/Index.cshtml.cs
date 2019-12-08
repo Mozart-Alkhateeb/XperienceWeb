@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Xperience.Data.Entities.Users;
 
-namespace Xperience.Areas.Identity.Pages.Account.Manage
+namespace Xperience.Pages.Account.Manage
 {
     //Profile Page
     public partial class IndexModel : PageModel

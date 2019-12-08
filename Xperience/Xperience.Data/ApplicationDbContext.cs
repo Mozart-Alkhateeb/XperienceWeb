@@ -51,15 +51,20 @@ namespace Xperience.Data
         public DbSet<UserNationality> UserNationalities { get; set; }
         public DbSet<UserReview> UserReviews { get; set; }
         public DbSet<UserSiteReview> UserSiteReviews { get; set; }
+        public DbSet<BaseUser> baseUsers;
         #endregion
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+
+        public ApplicationDbContext() : base() {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             #region Delete
+
 
             // Delete PostReactions
             modelBuilder.Entity<Post>()
@@ -326,7 +331,6 @@ namespace Xperience.Data
                 .HasMany(q => q.PostReactions)
                 .WithOne(q => q.Reaction)
                 .OnDelete(DeleteBehavior.Restrict);
-       
 
             #endregion
 
@@ -367,5 +371,6 @@ namespace Xperience.Data
                 .HasKey(q => new { q.ApplicationUserId, q.NationalityId});
             #endregion
         }
+
     }
 }

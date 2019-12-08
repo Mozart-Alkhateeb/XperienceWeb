@@ -3,19 +3,21 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Xperience.Data;
 
 namespace Xperience.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191125160909_SetupEntities")]
+    partial class SetupEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0")
+                .HasAnnotation("ProductVersion", "3.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -223,6 +225,8 @@ namespace Xperience.Data.Migrations
 
                     b.HasKey("ApplicationUserId", "RatedId");
 
+                    b.HasAlternateKey("Id");
+
                     b.HasIndex("RatedId");
 
                     b.ToTable("Ratings");
@@ -339,7 +343,7 @@ namespace Xperience.Data.Migrations
 
                     b.HasKey("PostId", "ApplicationUserId");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasAlternateKey("ApplicationUserId", "PostId");
 
                     b.HasIndex("ReactionId");
 
@@ -448,6 +452,47 @@ namespace Xperience.Data.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
+            modelBuilder.Entity("Xperience.Data.Entities.Users.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Biography")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ConnectorStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Info")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ReligionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("ReligionId");
+
+                    b.ToTable("ApplicationUser");
+                });
+
             modelBuilder.Entity("Xperience.Data.Entities.Users.BaseUser", b =>
                 {
                     b.Property<string>("Id")
@@ -456,12 +501,11 @@ namespace Xperience.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -506,6 +550,10 @@ namespace Xperience.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApplicationUserId")
+                        .IsUnique()
+                        .HasFilter("[ApplicationUserId] IS NOT NULL");
+
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -515,8 +563,6 @@ namespace Xperience.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("BaseUser");
                 });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.Block", b =>
@@ -788,44 +834,6 @@ namespace Xperience.Data.Migrations
                     b.ToTable("UserSiteReviews");
                 });
 
-            modelBuilder.Entity("Xperience.Data.Entities.Users.ApplicationUser", b =>
-                {
-                    b.HasBaseType("Xperience.Data.Entities.Users.BaseUser");
-
-                    b.Property<string>("Biography")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("ConnectorStatus")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Info")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("LocationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ReligionId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("LocationId");
-
-                    b.HasIndex("ReligionId");
-
-                    b.HasDiscriminator().HasValue("ApplicationUser");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Xperience.Data.Entities.Users.ApplicationRole", null)
@@ -982,6 +990,34 @@ namespace Xperience.Data.Migrations
                         .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Xperience.Data.Entities.Users.ApplicationUser", b =>
+                {
+                    b.HasOne("Xperience.Data.Entities.Users.BaseUser", "BaseUser")
+                        .WithOne()
+                        .HasForeignKey("Xperience.Data.Entities.Users.ApplicationUser", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Xperience.Data.Entities.Config.Location", "Location")
+                        .WithMany("ApplicationUsers")
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Xperience.Data.Entities.Config.Religion", "Religion")
+                        .WithMany("ApplicationUsers")
+                        .HasForeignKey("ReligionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Xperience.Data.Entities.Users.BaseUser", b =>
+                {
+                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                        .WithOne()
+                        .HasForeignKey("Xperience.Data.Entities.Users.BaseUser", "ApplicationUserId");
                 });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.Block", b =>
@@ -1187,19 +1223,6 @@ namespace Xperience.Data.Migrations
                         .HasForeignKey("SiteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Xperience.Data.Entities.Users.ApplicationUser", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Config.Location", "Location")
-                        .WithMany("ApplicationUsers")
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Xperience.Data.Entities.Config.Religion", "Religion")
-                        .WithMany("ApplicationUsers")
-                        .HasForeignKey("ReligionId")
-                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

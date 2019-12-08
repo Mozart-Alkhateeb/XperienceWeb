@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using System;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Xperience.Data.Entities.Users;
 
-namespace Xperience.Areas.Identity.Pages.Account
+namespace Xperience.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterModel : PageModel
@@ -47,6 +43,12 @@ namespace Xperience.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 5)]
+            [DataType(DataType.Text)]
+            [Display(Name = "Username")]
+            public string username { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -61,6 +63,17 @@ namespace Xperience.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name = "Birthday")]
+            [DataType(DataType.Date)]
+            public DateTime DOB { get; set; }
+
+            [Display(Name = "Gender")]
+            [DataType(DataType.Text)]
+            public string Gender { get; set; }
+
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -71,11 +84,16 @@ namespace Xperience.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new BaseUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser { 
+                    UserName = Input.username,
+                    Email = Input.Email,
+                    DateOfBirth = Input.DOB,
+                    Gender = Input.Gender
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

@@ -1,0 +1,22 @@
+﻿body {
+    
+}
+
+.register {
+    background-color: white;
+    padding-left : 0px;
+    padding-right : 0px;
+    border-radius : 1em;
+    overflow : hidden;
+    width : 80%;
+    border : 1px solid grey;
+
+}
+.title {
+    background-color:black;
+    text-align : center;
+    color: white;
+    width : 100%;
+    padding-top : 7px;
+    padding-bottom : 7px;
+}

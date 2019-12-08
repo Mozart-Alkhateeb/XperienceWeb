@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.1">
       <PrivateAssets>all</PrivateAssets>
@@ -23,12 +24,116 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.0.0-rc4" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Pages\User_Reviews\" />
     <Folder Include="Pages\Users\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Pages\_ViewImports.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Pages\_ViewStart.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Pages\Account\Manage\_ManageNav.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Account\Manage\_ManageNav.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Account\AccessDenied.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Account\Logout.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Account\Manage\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Account\Manage\_ManageNav.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Account\Manage\_StatusMessage.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Account\Manage\_ViewImports.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Account\Register.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Account\_StatusMessage.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Account\_ViewImports.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\_ValidationScriptsPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Pages\Account\Manage\_StatusMessage.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Account\Manage\_StatusMessage.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Pages\Account\Manage\_ViewImports.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Account\Manage\_ViewImports.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Pages\Account\Manage\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Account\Manage\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Pages\Account\_StatusMessage.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Account\_StatusMessage.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Pages\Account\_ViewImports.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Account\_ViewImports.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Pages\Account\AccessDenied.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Account\AccessDenied.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Pages\Account\Logout.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Account\Logout.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Pages\Account\Register.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Account\Register.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Pages\_ValidationScriptsPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\_ValidationScriptsPartial.cshtml" />
   </ItemGroup>
 
 </Project>

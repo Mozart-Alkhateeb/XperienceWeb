@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Xperience.Data;
 using Xperience.Data.Entities.Users;
+using Microsoft.OpenApi.Models;
 
 namespace Xperience
 {
@@ -35,6 +36,11 @@ namespace Xperience
                 options.Cookie.HttpOnly = true;
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
+            });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -81,6 +87,8 @@ namespace Xperience
                 options.SlidingExpiration = true;
             });
 
+            
+
             services.AddRazorPages().AddRazorPagesOptions(options =>
             {
                 options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
@@ -103,6 +111,13 @@ namespace Xperience
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

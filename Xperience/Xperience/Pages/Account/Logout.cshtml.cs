@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Xperience.Data.Entities.Users;
 
-namespace Xperience.Areas.Identity.Pages.Account
+namespace Xperience.Pages.Account
 {
     [AllowAnonymous]
     public class LogoutModel : PageModel

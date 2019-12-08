@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Xperience.Data.Entities.Config;
 using Xperience.Data.Entities.Posts;
 using Xperience.Data.Entities.Sites;
+using System.Data.Entity;
 
 namespace Xperience.Data.Entities.Users
 {
-    public class ApplicationUser
+    public class ApplicationUser : BaseUser
     {
         public string Name { get; set; }
         public string Biography { get; set; }
@@ -16,26 +16,24 @@ namespace Xperience.Data.Entities.Users
         public bool ConnectorStatus { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Gender { get; set; }
-        [Required]
+
         public string Info { get; set; }
 
         #region F.K
 
-        public string Id { get; set; }
-        [Key, Column(Order = 0), ForeignKey("Id")]
-        public BaseUser BaseUser { get; set; }
 
-        public int LocationId { get; set; }
+        public int? LocationId { get; set; }
         [ForeignKey("LocationId")]
         public Location Location { get; set; }
 
-        public int ReligionId { get; set; }
+        public int? ReligionId { get; set; }
         [ForeignKey("ReligionId")]
         public Religion Religion { get; set; }
         #endregion
 
         #region N.P
 
+        
         public ICollection<UserNationality> UserNationalities { get; set; }
         public ICollection<UserLanguage> UserLanguages { get; set; }
         public ICollection<UserSiteReview> UserSiteReviews { get; set; }
@@ -73,4 +71,5 @@ namespace Xperience.Data.Entities.Users
         public ICollection<Tag> TaggedBy { get; set; }
         #endregion
     }
+
 }
