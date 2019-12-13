@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Xperience.Data.Entities.Users;
+using Xperience.Data;
 
 namespace Xperience.Pages.Account
 {
@@ -19,16 +20,18 @@ namespace Xperience.Pages.Account
     public class LoginModel : PageModel
     {
         private readonly UserManager<BaseUser> _userManager;
+        private readonly ApplicationDbContext _context;
         private readonly SignInManager<BaseUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
         //private readonly IEmailSender _emailSender;
 
-        public LoginModel(SignInManager<BaseUser> signInManager, 
+        public LoginModel(SignInManager<BaseUser> signInManager,
             ILogger<LoginModel> logger,
             UserManager<BaseUser> userManager/*,
-            IEmailSender emailSender*/)
+            IEmailSender emailSender*/, ApplicationDbContext context)
         {
             _userManager = userManager;
+            _context = context;
             _signInManager = signInManager;
             //_emailSender = emailSender;
             _logger = logger;
@@ -65,7 +68,7 @@ namespace Xperience.Pages.Account
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
 
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = returnUrl ?? Url.Content("~/Account/feeds");
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
@@ -77,14 +80,15 @@ namespace Xperience.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl ??= Url.Content("~/Account/feeds");
 
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
-                if (result.Succeeded)
+                Console.WriteLine(Input.RememberMe);
+                var result = await _signInManager.PasswordSignInAsync(_context.Users.FirstOrDefault(x => x.Email == Input.Email), Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                if (result.Succeeded) 
                 {
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);

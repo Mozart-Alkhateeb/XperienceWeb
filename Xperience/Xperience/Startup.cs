@@ -43,6 +43,7 @@ namespace Xperience
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
 
+
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString(nameof(ApplicationDbContext)));
@@ -81,7 +82,7 @@ namespace Xperience
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(50);
 
-                options.LoginPath = "/Identity/Account/Login";
+                options.LoginPath = "/";
                 options.LogoutPath = "/Identity/Account/Logout";
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
