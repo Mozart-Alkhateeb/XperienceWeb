@@ -86,18 +86,24 @@ namespace Xperience.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
+     
+
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/Account/feeds");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+               
                 var user = new ApplicationUser { 
                     UserName = Input.username,
                     Email = Input.Email,
                     DateOfBirth = Input.DOB,
                     Gender = Input.Gender
                 };
+                //this one too
+
+                //notice ma3aml dbcontext.add(user) batteekh w 3amal save..
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
