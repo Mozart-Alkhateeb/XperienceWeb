@@ -1,0 +1,27 @@
+﻿@page
+@model Xperience.Pages.EditUserModel
+@inject UserManager<BaseUser> userManager
+@inject Xperience.Data.ApplicationDbContext context
+@{
+    ViewData["Title"] = "EditUser";
+    var currentUser = await userManager.GetUserAsync(HttpContext.User);
+    var user = context.Users.OfType<ApplicationUser>().FirstOrDefault(x => x.Id == currentUser.Id);
+}
+
+<h1>EditUser</h1>
+<h3>@currentUser.UserName</h3>
+
+@{ 
+    
+}
+
+<table>
+    <tr>
+        <td>Name : </td>
+        <td><input readonly value="@user.Name" /></td>
+    </tr>
+    <tr>
+
+    </tr>
+</table>
+
