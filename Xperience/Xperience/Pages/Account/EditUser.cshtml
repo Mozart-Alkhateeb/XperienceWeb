@@ -1,5 +1,5 @@
 ﻿@page
-@model Xperience.Pages.EditUserModel
+@model EditUserModel
 @inject UserManager<BaseUser> userManager
 @inject Xperience.Data.ApplicationDbContext context
 @{
@@ -11,17 +11,78 @@
 <h1>EditUser</h1>
 <h3>@currentUser.UserName</h3>
 
-@{ 
-    
+@{
+
 }
 
-<table>
-    <tr>
-        <td>Name : </td>
-        <td><input readonly value="@user.Name" /></td>
-    </tr>
-    <tr>
+<form method="post">
+    <table id="UserTable">
+        <tr>
+            <td>Username : </td>
+            <td><input readonly value="@user.UserName" id="element1" class="EditUserInput" /></td>
+        </tr>
+        <tr>
+            <td>Name : </td>
+            <td><input readonly value="@user.Name" id="element2" class="EditUserInput" asp-for="input.name"/></td>
+        </tr>
+        <tr>
+            <td> D.O.B : </td>
+            <td><input type="date" value="@user.DateOfBirth.ToString("yyyy-MM-dd")" readonly id="element3" class="EditUserInput" asp-for="input.DOB"/></td>
+        </tr>
+        <tr>
+            <td>Gender : </td>
+            <td><input readonly value="@user.Gender" id="element4" class="EditUserInput" asp-for="input.gender"/></td>
+        </tr>
+        <tr>
+            @{
+                var Rel = context.Religions.FirstOrDefault(x => x.Id == user.ReligionId)?.Name;
+            }
+            <td>Religion : </td>
+            <td><input readonly value="@Rel" placeholder="Optional" id="element5" class="EditUserInput" asp-for="input.Religion"/></td>
+        </tr>
+        <tr>
+            @{
+                var Loc = context.Locations.FirstOrDefault(x => x.Id == user.LocationId)?.Name;
+            }
+            <td>Location : </td>
+            <td><input readonly value="@Loc" id="element6" class="EditUserInput" asp-for="input.Location"/></td>
+        </tr>
+        <tr>
+            <td>Biography : </td>
+            <td><textarea readonly id="element7" asp-for="input.Biography" >@user.Biography</textarea></td>
+        </tr>
+        <tr>
+            <td>Conntector : </td>
+            <td><input type="checkbox" id="isConnector" onclick="showInfo(event)" asp-for="input.isConnector"/></td>
+        </tr>
+        <tr id="InfoForm">
+        </tr>
+    </table>
+    <button type="submit" class="btn btn-danger" style="visibility:hidden"id="saveButton">Save</button>
+</form>
+<input type="button" onclick="makeEditable()" value="Edit" id="editButton" class="btn btn-primary" />
 
-    </tr>
-</table>
+<script type="text/javascript">
+    var NOfElements = 7;
+    function showInfo(event) {
+        if (event.target.checked) {
+            var info = "<td>Info</td>";
+            info += "<td><textarea readonly asp-for='input.info'>@user.Info</textarea></td>";
+            document.getElementById("InfoForm").innerHTML += info;
+            NOfElements++;
+        } else {
+            document.getElementById("InfoForm").innerHTML = "";
+            NOfElements--;
+        }
+    }
+
+    function makeEditable() {
+        for (i = 2; i <= NOfElements; i++) {
+            document.getElementById("element" + i).removeAttribute("readonly");
+            document.getElementById("element" + i).removeAttribute("class");
+        }
+        document.getElementById("editButton").style.visibility = "hidden";
+        document.getElementById("saveButton").style.visibility = "visible";
+    } 
+</script>
 

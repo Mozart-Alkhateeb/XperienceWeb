@@ -1,4 +1,13 @@
-﻿@inject SignInManager<BaseUser> signinManager;
+﻿@inject SignInManager<BaseUser> signinManager
+@inject UserManager<BaseUser> userManager
+@inject Xperience.Data.ApplicationDbContext context
+@{
+
+
+    var currentUser = await userManager.GetUserAsync(Context.User);
+    var user = currentUser != null ? context.Users.OfType<ApplicationUser>().FirstOrDefault(x => x.Id == currentUser.Id) : null;
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +44,7 @@
                         @if (signinManager.IsSignedIn(User))
                         {
                             <li class="nav-item ml-auto">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Logout</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/EditUser">@user.UserName</a>
                             </li>
                         }
                     </ul>

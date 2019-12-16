@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Xperience.Data;
 using Xperience.Data.Entities.Users;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Xperience.Services;
 
 namespace Xperience
 {
@@ -37,6 +39,8 @@ namespace Xperience
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
             });
+
+            services.AddScoped<IEmailSender, EmailSender>();
 
             services.AddSwaggerGen(c =>
             {
@@ -88,7 +92,7 @@ namespace Xperience
                 options.SlidingExpiration = true;
             });
 
-            
+
 
             services.AddRazorPages().AddRazorPagesOptions(options =>
             {
