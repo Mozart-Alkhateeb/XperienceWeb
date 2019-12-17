@@ -60,6 +60,7 @@ namespace Xperience.Pages.Account
             currentUser = await userManager.GetUserAsync(HttpContext.User);
             user = context.Users.OfType<ApplicationUser>().FirstOrDefault(x => x.Id == currentUser.Id);
             input.Biography = user.Biography;
+            input.Info = user.Info;
         }
 
 
@@ -116,9 +117,6 @@ namespace Xperience.Pages.Account
             if (input.isConnector)
             {
                 user.Info = input.Info;
-            }
-            else {
-                user.Info = "";
             }
             var result = await userManager.UpdateAsync(user);
             await context.SaveChangesAsync();
