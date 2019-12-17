@@ -19,6 +19,9 @@ namespace Xperience.Pages.Account
         private readonly UserManager<BaseUser> userManager;
         private readonly SignInManager<BaseUser> signInManager;
         private readonly ApplicationDbContext context;
+        private BaseUser currentUser;
+        private ApplicationUser user;
+
 
         public EditUserModel(UserManager<BaseUser> userManager, SignInManager<BaseUser> signInManager, 
             ApplicationDbContext context) {
@@ -26,11 +29,12 @@ namespace Xperience.Pages.Account
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.context = context;
-
         }
 
+
+
         [BindProperty]
-        public InputModel input { get; set; }
+        public InputModel input { get; set; } = new InputModel();
 
         public class InputModel
         {
@@ -50,23 +54,32 @@ namespace Xperience.Pages.Account
 
             public Boolean isConnector { get; set; }
         }
-        
+
+        public async Task OnGetAsync()
+        {
+            currentUser = await userManager.GetUserAsync(HttpContext.User);
+            user = context.Users.OfType<ApplicationUser>().FirstOrDefault(x => x.Id == currentUser.Id);
+            input.Biography = user.Biography;
+        }
+
 
         public async Task<IActionResult> OnPostAsync() 
         {
+
 
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            var currentUser = await userManager.GetUserAsync(HttpContext.User);
+            currentUser = await userManager.GetUserAsync(HttpContext.User);
+            
 
             if (currentUser == null)
             {
-                return Redirect("~/Account/");
+                return Redirect("~/index");
             }
-            var user = context.Users.OfType<ApplicationUser>().FirstOrDefault(x => x.Id == currentUser.Id);
+            user = context.Users.OfType<ApplicationUser>().FirstOrDefault(x => x.Id == currentUser.Id);
             user.Name = input.name;
             user.DateOfBirth = input.DOB;
             user.Gender = input.gender;
