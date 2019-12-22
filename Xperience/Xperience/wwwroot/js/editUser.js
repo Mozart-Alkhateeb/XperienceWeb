@@ -62,7 +62,8 @@
         addNationalities: function (userNationalities) {
             $.each(userNationalities, function (i, item) {
                 $('#nation-' + item.id).attr('selected', true);
-            })
+            });
+            this.$input.trigger("chosen:updated");
         }
     }
 var user = {

@@ -131,9 +131,9 @@ namespace Xperience.Pages.Account
             {
                 user.Info = input.Info;
             }
-            var toRemove = context.UserLanguages
-                .Where(x => x.ApplicationUserId == user.Id && !input.languages.Contains(x.LanguageId));
-            context.UserLanguages.RemoveRange(toRemove);
+            var LangstoRemove = context.UserLanguages
+                .Where(x => x.ApplicationUserId == user.Id && !input.languages.Contains(x.LanguageId)).ToList();
+            context.UserLanguages.RemoveRange(LangstoRemove);
             foreach (int i in input.languages)
             {
                 var checkResult = context.UserLanguages.FirstOrDefault(x => x.LanguageId == i
@@ -146,6 +146,24 @@ namespace Xperience.Pages.Account
                         LanguageId = i
                     };
                     await context.UserLanguages.AddAsync(lang);
+                }
+            }
+
+            var NationstoRemove = context.UserNationalities
+                .Where(x => x.ApplicationUserId == user.Id && !input.Nationalities.Contains(x.NationalityId)).ToList();
+            context.UserNationalities.RemoveRange(NationstoRemove);
+            foreach (int i in input.Nationalities)
+            {
+                var checkResult = context.UserNationalities.FirstOrDefault(x => x.NationalityId == i
+                && x.ApplicationUserId == user.Id);
+                if (checkResult == null)
+                {
+                    var nation = new UserNationality()
+                    {
+                        ApplicationUserId = user.Id,
+                        NationalityId = i
+                    };
+                    await context.UserNationalities.AddAsync(nation);
                 }
             }
             var result = await userManager.UpdateAsync(user);
