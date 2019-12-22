@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
+using System;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Xperience.APIModels;
-using Xperience.Data;
 using Xperience.Data.Entities.Users;
+using Xperience.Data;
+using Xperience.APIModels;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Xperience.Controllers
 {
@@ -18,58 +18,53 @@ namespace Xperience.Controllers
         private readonly UserManager<BaseUser> _userManager;
         private readonly ApplicationDbContext _dbContext;
 
-        public UsersController(UserManager<BaseUser> userManager, ApplicationDbContext dbContext)
+        public UsersController(
+            UserManager<BaseUser> userManager,
+            ApplicationDbContext dbContext)
         {
             _userManager = userManager;
             _dbContext = dbContext;
         }
 
-        [HttpPost] // This is the register method
-
-        //h
-        public async Task<IActionResult> Post(ManageUserModel value)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<string>> GetAsync(String id)
         {
-            try
+
+            var data = await _userManager.FindByIdAsync(id);
+            if (data == null)
+                return BadRequest();
+            return Ok(data);
+        }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<BaseUser>>> GetUsers()
+        {
+
+            return await _dbContext.Users.ToListAsync();
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> PostAsync(ManageUserModel newUser)
+        {
+            var user = new ApplicationUser
             {
-                // First we create the base user using the user manager class
-                var baseUser = new BaseUser { UserName = value.UserName, Email = value.Email };
-                var result = await _userManager.CreateAsync(baseUser, value.Password);
+                UserName = newUser.UserName,
+                Email = newUser.Email,
+                DateOfBirth = newUser.DateOfBirth,
+                Gender = newUser.Gender
+            };
 
-                // Then if the user was created successfully we add the compliment of the user which is saved in another table
-                if (result.Succeeded)
-                {
-                    try
-                    {
-                        // This way of setting the properties of an object is not a good practice, (Check out something called Automapper, if you want)
-                        var user = new ApplicationUser()
-                        {
-                            Id = baseUser.Id,
-                            LocationId = value.LocationId,
-                            Name = value.Name,
-                            DateOfBirth = value.DateOfBirth,
-                            Biography = value.Biography,
-                            Info = value.Info,
-                            Gender = value.Gender,
-                            ReligionId = value.ReligionId,
-                        };
+            var result = await _userManager.CreateAsync(user, newUser.Password);
 
-                        _dbContext.ApplicationUsers.Add(user);
-                        await _dbContext.SaveChangesAsync();
-                    }
-                    catch (Exception ex)
-                    {
-
-                        await _userManager.DeleteAsync(baseUser);
-                    }
-                }
-
-                return Ok(); // This Could also return Created()
-            }
-            catch (Exception ex)
-            {
-                // Here we should do some logging and tell the user why there was an error
-                return BadRequest("Some error message");
-            }
+            _dbContext.SaveChanges();
+            return Ok();
+        }
+        [HttpGet]
+        public async Task<IActionResult> OnGetAsync()
+        {
+            var data = await _userManager.GetUserAsync(HttpContext.User);
+            if (data == null) return NotFound();
+            return Ok(data);
         }
     }
 }

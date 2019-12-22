@@ -23,8 +23,9 @@ namespace Xperience.Pages.Account
         private ApplicationUser user;
 
 
-        public EditUserModel(UserManager<BaseUser> userManager, SignInManager<BaseUser> signInManager, 
-            ApplicationDbContext context) {
+        public EditUserModel(UserManager<BaseUser> userManager, SignInManager<BaseUser> signInManager,
+            ApplicationDbContext context)
+        {
 
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -39,7 +40,7 @@ namespace Xperience.Pages.Account
         public class InputModel
         {
             public string name { get; set; }
-            
+
             public DateTime DOB { get; set; }
 
             public string gender { get; set; }
@@ -53,6 +54,10 @@ namespace Xperience.Pages.Account
             public string Info { get; set; }
 
             public Boolean isConnector { get; set; }
+
+            public List<int> languages { get; set; }
+
+            public List<int> Nationalities { get; set;}
         }
 
         public async Task OnGetAsync()
@@ -64,7 +69,7 @@ namespace Xperience.Pages.Account
         }
 
 
-        public async Task<IActionResult> OnPostAsync() 
+        public async Task<IActionResult> OnPostAsync()
         {
 
 
@@ -74,7 +79,7 @@ namespace Xperience.Pages.Account
             }
 
             currentUser = await userManager.GetUserAsync(HttpContext.User);
-            
+
 
             if (currentUser == null)
             {
@@ -84,7 +89,12 @@ namespace Xperience.Pages.Account
             user.Name = input.name;
             user.DateOfBirth = input.DOB;
             user.Gender = input.gender;
-            if (input.Religion != null) {
+            if (input.Religion == null)
+            {
+                user.ReligionId = null;
+            }
+            else
+            {
                 var religion = context.Religions.FirstOrDefault(x => x.Name == input.Religion);
                 if (religion == null)
                 {
@@ -97,9 +107,12 @@ namespace Xperience.Pages.Account
                 }
                 user.ReligionId = context.Religions.FirstOrDefault(x => x.Name == input.Religion).Id;
             }
-
-            if (input.Location != null) {
-
+            if (input.Location == null)
+            {
+                user.LocationId = null;
+            }
+            else
+            {
                 var location = context.Locations.FirstOrDefault(x => x.Name == input.Location);
                 if (location == null)
                 {
@@ -118,12 +131,29 @@ namespace Xperience.Pages.Account
             {
                 user.Info = input.Info;
             }
+            var toRemove = context.UserLanguages
+                .Where(x => x.ApplicationUserId == user.Id && !input.languages.Contains(x.LanguageId));
+            context.UserLanguages.RemoveRange(toRemove);
+            foreach (int i in input.languages)
+            {
+                var checkResult = context.UserLanguages.FirstOrDefault(x => x.LanguageId == i
+                && x.ApplicationUserId == user.Id);
+                if (checkResult == null)
+                {
+                    var lang = new UserLanguage()
+                    {
+                        ApplicationUserId = user.Id,
+                        LanguageId = i
+                    };
+                    await context.UserLanguages.AddAsync(lang);
+                }
+            }
             var result = await userManager.UpdateAsync(user);
             await context.SaveChangesAsync();
-            if(result.Succeeded) return RedirectToPage();
+            if (result.Succeeded) return RedirectToPage();
             return BadRequest();
         }
 
-        
+
     }
 }

@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <Folder Include="Pages\Users\" />
+    <Folder Include="Pages\User_Reviews\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -140,6 +141,20 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Pages\_ValidationScriptsPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\chosen.js\chosen.jquery.js" />
+    <None Include="wwwroot\lib\chosen.js\chosen.jquery.min.js" />
+    <None Include="wwwroot\lib\chosen.js\chosen.proto.js" />
+    <None Include="wwwroot\lib\chosen.js\chosen.proto.min.js" />
+    <None Include="wwwroot\lib\chosen.js\docsupport\init.js" />
+    <None Include="wwwroot\lib\chosen.js\docsupport\init.proto.js" />
+    <None Include="wwwroot\lib\chosen.js\docsupport\jquery-1.12.4.min.js" />
+    <None Include="wwwroot\lib\chosen.js\docsupport\jquery-3.2.1.min.js" />
+    <None Include="wwwroot\lib\chosen.js\docsupport\prism.js" />
+    <None Include="wwwroot\lib\chosen.js\docsupport\prototype-1.7.0.0.js" />
+    <None Include="wwwroot\lib\chosen.js\LICENSE.md" />
   </ItemGroup>
 
 </Project>
