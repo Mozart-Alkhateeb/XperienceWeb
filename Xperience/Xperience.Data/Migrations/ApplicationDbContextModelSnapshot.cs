@@ -1109,7 +1109,6 @@ namespace Xperience.Data.Migrations
                     b.HasOne("Xperience.Data.Entities.Posts.Post", "Post")
                         .WithMany("Tags")
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "Tagged")

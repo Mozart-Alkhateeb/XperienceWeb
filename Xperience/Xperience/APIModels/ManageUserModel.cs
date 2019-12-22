@@ -18,7 +18,6 @@ namespace Xperience.APIModels
         public bool ConnectorStatus { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Gender { get; set; }
-        [Required]
         public string Info { get; set; }
 
         public int LocationId { get; set; }

@@ -7,5 +7,6 @@ namespace Xperience.Data.Entities.Users
 {
     public class BaseUser :  IdentityUser
     {
+  
     }
 }
