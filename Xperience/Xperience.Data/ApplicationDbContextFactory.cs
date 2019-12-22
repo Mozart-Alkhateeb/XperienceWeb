@@ -16,7 +16,7 @@ namespace Xperience.Data
             IConfiguration config = new ConfigurationBuilder()
                 .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../Xperience"))
                 .AddJsonFile("appsettings.json", optional: false)
-                .AddJsonFile($"appsettings.{envName}.json", optional: false)
+                //.AddJsonFile($"appsettings.{envName}.json", optional: false)
                 .Build();
             var connectionString = config.GetConnectionString(nameof(ApplicationDbContext));
 

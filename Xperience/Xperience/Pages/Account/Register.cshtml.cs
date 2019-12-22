@@ -13,6 +13,7 @@ using Xperience.Data.Entities.Users;
 
 namespace Xperience.Pages.Account
 {
+  
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
@@ -31,6 +32,10 @@ namespace Xperience.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             //_emailSender = emailSender;
+        }
+
+        public RegisterModel()
+        {
         }
 
         [BindProperty]
