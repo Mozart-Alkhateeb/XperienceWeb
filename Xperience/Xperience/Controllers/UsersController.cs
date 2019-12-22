@@ -14,7 +14,7 @@ namespace Xperience.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
-    { 
+    {
         private readonly UserManager<BaseUser> _userManager;
         private readonly ApplicationDbContext _dbContext;
 
@@ -58,6 +58,13 @@ namespace Xperience.Controllers
 
             _dbContext.SaveChanges();
             return Ok();
+        }
+        [HttpGet]
+        public async Task<IActionResult> OnGetAsync()
+        {
+            var data = await _userManager.GetUserAsync(HttpContext.User);
+            if (data == null) return NotFound();
+            return Ok(data);
         }
     }
 }

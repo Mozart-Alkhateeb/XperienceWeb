@@ -10,9 +10,6 @@ using Xperience.Data.Entities.Config;
 
 namespace Xperience.Controllers
 {
-
-    //hole our controllers 
-    //bedna nebaat la hone lobjects te3oulna 3ala lurl tabaa hole lmethods
     [Route("api/[controller]")]
     [ApiController]
     public class LocationsController : ControllerBase
@@ -26,15 +23,6 @@ namespace Xperience.Controllers
 
         // GET: api/Locations
         [HttpGet]
-
-        //for instance hayde lurl te3a hwwe http...api/locations/getLocations();
-        //ana bebaat men lapi service class bel android call aala hayda lurl to invoke hayde lmethod li hone
-        //heyye betraje3le aade list of locations bas ana byusalule json w baaden there displayed yaane
-        //did u get these?
-        // eh I watched tutorial about how to use restful apis, w now 3refet shu huwe l url li lezm esta3mlo bs for more
-        // details what are the 3 dots...
-
-            //ok shouf
         public async Task<ActionResult<IEnumerable<Location>>> GetLocations()
         {
             return await _context.Locations.ToListAsync();

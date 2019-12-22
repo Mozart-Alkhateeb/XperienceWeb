@@ -4,13 +4,15 @@
     ViewData["Title"] = "Register";
 }
 
+<div class="back">
 
+</div>
 
 <div class="row">
     <div class="col-md-7">
-        <img src ="~/Images/logo.png" style="height:60%; width : 60%; margin-left : 50px; margin-top : 20px;"/>
+        <!--<img src ="~/Images/logo.png" style="height:60%; width : 60%; margin-left : 50px; margin-top : 20px;"/>-->
     </div>
-    <div class="col-md-5 register">
+    <div class="col-md-5 form">
         <div class="title">
             <h2>@ViewData["Title"]</h2>
         </div>
@@ -61,8 +63,8 @@
                         <label asp-for="Input.Gender"></label>
                         <select class="form-control" asp-for="Input.Gender">
                             <option>--Select--</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </select>
                     </div>
                 </div>
@@ -70,6 +72,10 @@
             
 
             <center><button type="submit" class="btn btn-primary btn-block mt-2" >Register!</button></center>
+
+            <div style="padding-top : 5px;">
+                <span>Already Have An Account? <a href="~/">Log in Here</a></span>
+            </div>
         </form>
     </div>
 

@@ -36,6 +36,8 @@ namespace Xperience.Data
         #endregion
 
         #region Users
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Block> Blocks { get; set; }
         public DbSet<Connection> Connections { get; set; }
         public DbSet<ConnectionRequest> ConnectionRequests { get; set; }
@@ -217,8 +219,14 @@ namespace Xperience.Data
                 .WithOne(q => q.ApplicationUser)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
+            //amena added delete tags keep post
+            modelBuilder.Entity<Tag>()
+              .HasOne(q => q.Post)
+              .WithMany(q => q.Tags)
+              .OnDelete(DeleteBehavior.ClientSetNull);
+
             //amena added Keep Posts
-          
+
             modelBuilder.Entity<ApplicationUser>()
              .HasMany(q => q.Posts)
              .WithOne(q => q.ApplicationUser)
@@ -280,12 +288,6 @@ namespace Xperience.Data
              .WithOne(q => q.Hashtag)
              .OnDelete(DeleteBehavior.ClientSetNull);
 
-             //amena added delete tags keep post
-            modelBuilder.Entity<Tag>()
-              .HasOne(q => q.Post)
-              .WithMany(q => q.Tags)
-              .OnDelete(DeleteBehavior.ClientSetNull);
-
 
             #endregion
 
@@ -295,7 +297,6 @@ namespace Xperience.Data
                 .HasMany(q => q.Sites)
                 .WithOne(q => q.Category)
                 .OnDelete(DeleteBehavior.Restrict);
-
 
             modelBuilder.Entity<Category>()
                 .HasMany(q => q.UserInterests)

@@ -14,6 +14,8 @@ using Microsoft.OpenApi.Models;
 using Xperience.Data;
 using Xperience.Data.Entities.Users;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Xperience.Services;
 
 namespace Xperience
 {
@@ -39,10 +41,13 @@ namespace Xperience
                 options.Cookie.IsEssential = true;
             });
 
+            services.AddScoped<IEmailSender, EmailSender>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
+
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
@@ -82,13 +87,13 @@ namespace Xperience
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(50);
 
-                options.LoginPath = "/Identity/Account/Login";
+                options.LoginPath = "/";
                 options.LogoutPath = "/Identity/Account/Logout";
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
 
-            
+
 
             services.AddRazorPages().AddRazorPagesOptions(options =>
             {

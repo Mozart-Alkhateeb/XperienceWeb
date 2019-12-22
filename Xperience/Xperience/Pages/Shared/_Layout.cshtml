@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<BaseUser> signinManager
+@inject UserManager<BaseUser> userManager
+@inject Xperience.Data.ApplicationDbContext context
+@{
+
+
+    var currentUser = await userManager.GetUserAsync(Context.User);
+    var user = currentUser != null ? context.Users.OfType<ApplicationUser>().FirstOrDefault(x => x.Id == currentUser.Id) : null;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,6 +17,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/lib/chosen.js/chosen.css" rel="stylesheet"/>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="~/lib/chosen.js/chosen.jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 </head>
 <body>
     <header>
@@ -31,6 +46,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/SiteCategories/Index">Site Categories</a>
                         </li>
+                        @if (signinManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item ml-auto">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/EditUser">@user.UserName</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -42,15 +63,13 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" style="background-color : rgba(255, 255, 255, 0.6);">
         <div class="container">
             &copy; 2019 - Xperience - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
 
     @RenderSection("Scripts", required: false)
 </body>

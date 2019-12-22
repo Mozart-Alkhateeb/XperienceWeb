@@ -2,7 +2,7 @@
     
 }
 
-.register {
+.form {
     background-color: white;
     padding-left : 0px;
     padding-right : 0px;
@@ -19,4 +19,15 @@
     width : 100%;
     padding-top : 7px;
     padding-bottom : 7px;
+}
+
+.back{
+    height : 100%;
+    width : 100%;
+    background-color : rgba(255,255,255,0.5);
+}
+
+.EditUserInput {
+    border : none;
+    outline : none;
 }

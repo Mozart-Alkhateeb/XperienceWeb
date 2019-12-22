@@ -1,0 +1,102 @@
+﻿@page
+@model EditUserModel
+@inject UserManager<BaseUser> userManager
+@inject Xperience.Data.ApplicationDbContext context
+@{
+    ViewData["Title"] = "EditUser";
+    var currentUser = await userManager.GetUserAsync(HttpContext.User);
+    var user = context.Users.OfType<ApplicationUser>().FirstOrDefault(x => x.Id == currentUser.Id);
+}
+
+<h1>EditUser</h1>
+<h3>@currentUser.UserName</h3>
+
+@{
+
+}
+
+<form method="post">
+    <table id="UserTable">
+        <tr>
+            <td>Username : </td>
+            <td><input readonly value="@user.UserName"  class="EditUserInput inputElement" /></td>
+        </tr>
+        <tr>
+            <td>Name : </td>
+            <td><input readonly value="@user.Name" class="EditUserInput inputElement" asp-for="input.name" /></td>
+        </tr>
+        <tr>
+            <td> D.O.B : </td>
+            <td><input type="date" value="@user.DateOfBirth.ToString("yyyy-MM-dd")" readonly class="EditUserInput inputElement" asp-for="input.DOB" /></td>
+        </tr>
+        <tr>
+            <td>Gender : </td>
+            <td>
+                <select disabled id="gender" class="EditUserInput selectInput inputElement" asp-for="input.gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            @{
+                var Rel = context.Religions.FirstOrDefault(x => x.Id == user.ReligionId)?.Name;
+            }
+            <td>Religion : </td>
+            <td><input readonly value="@Rel" class="EditUserInput inputElement" asp-for="input.Religion" /></td>
+        </tr>
+        <tr>
+            @{
+                var Loc = context.Locations.FirstOrDefault(x => x.Id == user.LocationId)?.Name;
+            }
+            <td>Location : </td>
+            <td><input readonly value="@Loc" class="EditUserInput inputElement" asp-for="input.Location" /></td>
+        </tr>
+        <tr>
+            <td>Languages : </td>
+            <td>
+                <select asp-for="input.languages" class="langs selectInput" multiple>
+                  @foreach (var item in context.Languages) { 
+                    <option id="lang-@item.Id" value="@item.Id">@item.Name</option>
+                  }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Nationalities : </td>
+            <td>
+                <select asp-for="input.Nationalities" class="nations selectInput" multiple>
+                    @foreach (var item in context.Nationalities) { 
+                        <option id="nation-@item.Id" value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Biography : </td>
+            <td><textarea readonly asp-for="input.Biography" class="inputElement">@user.Biography</textarea></td>
+        </tr>
+        <tr>
+            <td>Conntector : </td>
+            <td>
+                <input disabled type="checkbox" id="isConnector" class="selectInput" asp-for="input.isConnector" />
+            </td>
+        </tr>
+        <tr id="info">
+            <td>Info : </td>
+            <td>
+                <textarea readonly asp-for='input.Info' class="inputElement">@user.Info</textarea>
+            </td>
+        </tr>
+    </table>
+    <button type="submit" class="btn btn-danger" id="saveButton">Save</button>
+</form>
+<input type="button" value="Edit" class="btn btn-primary editButton" />
+
+<form action="/Account/ChangePassword">
+    <button type="submit">Change Password</button>
+</form>
+
+<script src="~/js/editUser.js"></script>
+
+
