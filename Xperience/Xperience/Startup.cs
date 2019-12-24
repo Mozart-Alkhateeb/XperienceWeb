@@ -13,9 +13,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Xperience.Data;
 using Xperience.Data.Entities.Users;
-using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Xperience.Services;
 
 namespace Xperience
 {
@@ -41,13 +38,11 @@ namespace Xperience
                 options.Cookie.IsEssential = true;
             });
 
-            services.AddScoped<IEmailSender, EmailSender>();
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
-
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
@@ -55,10 +50,11 @@ namespace Xperience
             });
 
             services.AddIdentity<BaseUser, ApplicationRole>(options =>
-                {
-                })
+            {
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders()
+                 .AddDefaultUI();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -87,7 +83,7 @@ namespace Xperience
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(50);
 
-                options.LoginPath = "/";
+                options.LoginPath = "/Identity/Account/Login";
                 options.LogoutPath = "/Identity/Account/Logout";
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
@@ -104,21 +100,6 @@ namespace Xperience
 
             // Register the Swagger generator, defining 1 or more Swagger documents
 
-            //hayde is running normally bgher projects bas idk whats the issue 
-            //nehna bdna swagger aashen testing 
-            //ha jarreb postman right now
-            //fahmen lconcept te3 testing lendpoints?
-            // not really 
-            //ok shouf nehna aam naamel publish la hayda lwebsite 3al IIS yaane aam naamel hosting so hone fi api methods bdna net2akkad inno aam yeshteghlo via postman aw swagger li henne api testers to ensure inno fi cxn aam tseer
-            // so ana lmafroud ykun aande l web project w sewilo hosting aal iis ta e2dar sewe testing?
-            //eh its a must mesh bas mishen ltesting la2an nehna ha nebaat json objects 3ala lmethods li hone bel controllers w henne ha yraj3o shi w hayde lshi rah yethawal la json object bas yusal 3al mobile
-            //yaane bala hayde lproject mabtemshe
-            //alright can I see l api class li bil android studio? ta e2dar shuf l connection
-            //eh bs abel look
-           /* services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-            });*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -156,7 +137,7 @@ namespace Xperience
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            
+
 
             app.UseCookiePolicy();
             app.UseAuthentication();

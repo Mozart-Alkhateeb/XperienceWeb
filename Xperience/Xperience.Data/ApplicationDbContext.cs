@@ -37,7 +37,7 @@ namespace Xperience.Data
 
         #region Users
 
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+     //   public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Block> Blocks { get; set; }
         public DbSet<Connection> Connections { get; set; }
         public DbSet<ConnectionRequest> ConnectionRequests { get; set; }
@@ -57,7 +57,8 @@ namespace Xperience.Data
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        public ApplicationDbContext() : base() {
+        public ApplicationDbContext() : base()
+        {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -151,7 +152,7 @@ namespace Xperience.Data
                 .WithMany(q => q.TaggedBy)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
-           
+
 
             // Delete Blocks
             modelBuilder.Entity<ApplicationUser>()
@@ -219,12 +220,6 @@ namespace Xperience.Data
                 .WithOne(q => q.ApplicationUser)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            //amena added delete tags keep post
-            modelBuilder.Entity<Tag>()
-              .HasOne(q => q.Post)
-              .WithMany(q => q.Tags)
-              .OnDelete(DeleteBehavior.ClientSetNull);
-
             //amena added Keep Posts
 
             modelBuilder.Entity<ApplicationUser>()
@@ -288,6 +283,12 @@ namespace Xperience.Data
              .WithOne(q => q.Hashtag)
              .OnDelete(DeleteBehavior.ClientSetNull);
 
+            //amena added delete tags keep post
+            modelBuilder.Entity<Tag>()
+              .HasOne(q => q.Post)
+              .WithMany(q => q.Tags)
+              .OnDelete(DeleteBehavior.ClientSetNull);
+
 
             #endregion
 
@@ -297,6 +298,8 @@ namespace Xperience.Data
                 .HasMany(q => q.Sites)
                 .WithOne(q => q.Category)
                 .OnDelete(DeleteBehavior.Restrict);
+
+
 
             modelBuilder.Entity<Category>()
                 .HasMany(q => q.UserInterests)
@@ -333,43 +336,44 @@ namespace Xperience.Data
                 .WithOne(q => q.Reaction)
                 .OnDelete(DeleteBehavior.Restrict);
 
+
             #endregion
 
             #region Composite F.K
 
             modelBuilder.Entity<Rating>()
-                .HasKey(q => new { q.ApplicationUserId, q.RatedId });    
-            
-            modelBuilder.Entity<PostReaction>()
-                .HasKey(q => new { q.PostId, q.ApplicationUserId});     
-            
-            modelBuilder.Entity<Block>()
-                .HasKey(q => new { q.ApplicationUserId, q.BlockedId});   
-            
-            modelBuilder.Entity<Connection>()
-                .HasKey(q => new { q.ApplicationUserId, q.ConnectedId});
-            
-            modelBuilder.Entity<ConnectionRequest>()
-                .HasKey(q => new { q.ApplicationUserId, q.ReceiverId});
-            
-            modelBuilder.Entity<ConnectorLocation>()
-                .HasKey(q => new { q.ApplicationUserId, q.LocationId});
+                .HasKey(q => new { q.ApplicationUserId, q.RatedId });
 
-            
+            modelBuilder.Entity<PostReaction>()
+                .HasKey(q => new { q.PostId, q.ApplicationUserId });
+
+            modelBuilder.Entity<Block>()
+                .HasKey(q => new { q.ApplicationUserId, q.BlockedId });
+
+            modelBuilder.Entity<Connection>()
+                .HasKey(q => new { q.ApplicationUserId, q.ConnectedId });
+
+            modelBuilder.Entity<ConnectionRequest>()
+                .HasKey(q => new { q.ApplicationUserId, q.ReceiverId });
+
+            modelBuilder.Entity<ConnectorLocation>()
+                .HasKey(q => new { q.ApplicationUserId, q.LocationId });
+
+
             modelBuilder.Entity<FollowedSite>()
-                .HasKey(q => new { q.ApplicationUserId, q.SiteId});
-            
+                .HasKey(q => new { q.ApplicationUserId, q.SiteId });
+
             modelBuilder.Entity<FollowedUser>()
-                .HasKey(q => new { q.ApplicationUserId, q.FollowerId});
-            
+                .HasKey(q => new { q.ApplicationUserId, q.FollowerId });
+
             modelBuilder.Entity<UserInterest>()
-                .HasKey(q => new { q.ApplicationUserId, q.CategoryId});
-            
+                .HasKey(q => new { q.ApplicationUserId, q.CategoryId });
+
             modelBuilder.Entity<UserLanguage>()
-                .HasKey(q => new { q.ApplicationUserId, q.LanguageId});
-            
+                .HasKey(q => new { q.ApplicationUserId, q.LanguageId });
+
             modelBuilder.Entity<UserNationality>()
-                .HasKey(q => new { q.ApplicationUserId, q.NationalityId});
+                .HasKey(q => new { q.ApplicationUserId, q.NationalityId });
             #endregion
         }
 

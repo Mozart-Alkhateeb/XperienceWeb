@@ -18,7 +18,7 @@ namespace Xperience.Controllers
         {
             _dbContext = dbContext;
         }
-
+        [HttpGet]
         public IActionResult OnGet(string id) {
             var table = (from userLang in _dbContext.UserNationalities
                          join nation in _dbContext.Nationalities on userLang.NationalityId equals nation.Id

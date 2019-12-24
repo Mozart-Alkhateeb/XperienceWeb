@@ -35,13 +35,6 @@ namespace Xperience.Controllers
                 return BadRequest();
             return Ok(data);
         }
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<BaseUser>>> GetUsers()
-        {
-
-            return await _dbContext.Users.ToListAsync();
-        }
-
 
         [HttpPost]
         public async Task<ActionResult> PostAsync(ManageUserModel newUser)
