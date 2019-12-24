@@ -20,1186 +20,1187 @@ namespace Xperience.Data.Migrations
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ClaimType")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ClaimValue")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("RoleId")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("RoleId");
+                b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
-                });
+                b.ToTable("AspNetRoleClaims");
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ClaimType")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ClaimValue")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("UserId")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
-                });
+                b.ToTable("AspNetUserClaims");
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("LoginProvider")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("ProviderKey")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ProviderDisplayName")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("UserId")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("LoginProvider", "ProviderKey");
+                b.HasKey("LoginProvider", "ProviderKey");
 
-                    b.HasIndex("UserId");
+                b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
-                });
+                b.ToTable("AspNetUserLogins");
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("UserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("RoleId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("UserId", "RoleId");
+                b.HasKey("UserId", "RoleId");
 
-                    b.HasIndex("RoleId");
+                b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
-                });
+                b.ToTable("AspNetUserRoles");
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("UserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("LoginProvider")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("Name")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Value")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId", "LoginProvider", "Name");
+                b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
-                });
+                b.ToTable("AspNetUserTokens");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Config.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Categories");
-                });
+                b.ToTable("Categories");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Config.Hashtag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Hashtags");
-                });
+                b.ToTable("Hashtags");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Config.Language", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250);
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(250)")
+                    .HasMaxLength(250);
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Languages");
-                });
+                b.ToTable("Languages");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Config.Location", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Locations");
-                });
+                b.ToTable("Locations");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Config.Nationality", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250);
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(250)")
+                    .HasMaxLength(250);
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Nationalities");
-                });
+                b.ToTable("Nationalities");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Config.Rating", b =>
-                {
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RatedId")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("RatedId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<float>("RatingValue")
-                        .HasColumnType("real");
+                b.Property<float>("RatingValue")
+                    .HasColumnType("real");
 
-                    b.HasKey("ApplicationUserId", "RatedId");
+                b.HasKey("ApplicationUserId", "RatedId");
 
-                    b.HasIndex("RatedId");
+                b.HasIndex("RatedId");
 
-                    b.ToTable("Ratings");
-                });
+                b.ToTable("Ratings");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Config.Reaction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("IconPath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("IconPath")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ReactionText")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250);
+                b.Property<string>("ReactionText")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(250)")
+                    .HasMaxLength(250);
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Reactions");
-                });
+                b.ToTable("Reactions");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Config.Religion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Religions");
-                });
+                b.ToTable("Religions");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Posts.Comment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("ApplicationUserId")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CommentDetails")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("CommentDetails")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
+                b.Property<int>("PostId")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("PostId");
+                b.HasIndex("PostId");
 
-                    b.ToTable("Comments");
-                });
+                b.ToTable("Comments");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Posts.Post", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Caption")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Caption")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("HashtagId")
-                        .HasColumnType("int");
+                b.Property<int?>("HashtagId")
+                    .HasColumnType("int");
 
-                    b.Property<string>("PostDetails")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("PostDetails")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SiteId")
-                        .HasColumnType("int");
+                b.Property<int>("SiteId")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("HashtagId");
+                b.HasIndex("HashtagId");
 
-                    b.HasIndex("SiteId");
+                b.HasIndex("SiteId");
 
-                    b.ToTable("Posts");
-                });
+                b.ToTable("Posts");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Posts.PostReaction", b =>
-                {
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
+            {
+                b.Property<int>("PostId")
+                    .HasColumnType("int");
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("ReactionId")
-                        .HasColumnType("int");
+                b.Property<int>("ReactionId")
+                    .HasColumnType("int");
 
-                    b.HasKey("PostId", "ApplicationUserId");
+                b.HasKey("PostId", "ApplicationUserId");
 
-                    b.HasIndex("ApplicationUserId");
+                b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("ReactionId");
+                b.HasIndex("ReactionId");
 
-                    b.ToTable("PostReactions");
-                });
+                b.ToTable("PostReactions");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Posts.ReportedPost", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
+                b.Property<int>("PostId")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("PostId");
+                b.HasIndex("PostId");
 
-                    b.ToTable("ReportedPosts");
-                });
+                b.ToTable("ReportedPosts");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Sites.ReportedSite", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("SiteId")
-                        .HasColumnType("int");
+                b.Property<int>("SiteId")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("SiteId");
+                b.HasIndex("SiteId");
 
-                    b.ToTable("ReportedSites");
-                });
+                b.ToTable("ReportedSites");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Sites.Site", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                b.Property<int>("CategoryId")
+                    .HasColumnType("int");
 
-                    b.Property<float>("Latitude")
-                        .HasColumnType("real");
+                b.Property<float>("Latitude")
+                    .HasColumnType("real");
 
-                    b.Property<int>("LocationId")
-                        .HasColumnType("int");
+                b.Property<int>("LocationId")
+                    .HasColumnType("int");
 
-                    b.Property<float>("Longitude")
-                        .HasColumnType("real");
+                b.Property<float>("Longitude")
+                    .HasColumnType("real");
 
-                    b.Property<int>("Name")
-                        .HasColumnType("int");
+                b.Property<int>("Name")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                b.HasIndex("CategoryId");
 
-                    b.HasIndex("LocationId");
+                b.HasIndex("LocationId");
 
-                    b.ToTable("Sites");
-                });
+                b.ToTable("Sites");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.ApplicationRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("Id")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ConcurrencyStamp")
+                    .IsConcurrencyToken()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                b.Property<string>("Name")
+                    .HasColumnType("nvarchar(256)")
+                    .HasMaxLength(256);
 
-                    b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                b.Property<string>("NormalizedName")
+                    .HasColumnType("nvarchar(256)")
+                    .HasMaxLength(256);
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                b.HasIndex("NormalizedName")
+                    .IsUnique()
+                    .HasName("RoleNameIndex")
+                    .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles");
-                });
+                b.ToTable("AspNetRoles");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.BaseUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("Id")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
+                b.Property<int>("AccessFailedCount")
+                    .HasColumnType("int");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ConcurrencyStamp")
+                    .IsConcurrencyToken()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Discriminator")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                b.Property<string>("Email")
+                    .HasColumnType("nvarchar(256)")
+                    .HasMaxLength(256);
 
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                b.Property<bool>("EmailConfirmed")
+                    .HasColumnType("bit");
 
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                b.Property<bool>("LockoutEnabled")
+                    .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                b.Property<DateTimeOffset?>("LockoutEnd")
+                    .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                b.Property<string>("NormalizedEmail")
+                    .HasColumnType("nvarchar(256)")
+                    .HasMaxLength(256);
 
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                b.Property<string>("NormalizedUserName")
+                    .HasColumnType("nvarchar(256)")
+                    .HasMaxLength(256);
 
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("PasswordHash")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("PhoneNumber")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+                b.Property<bool>("PhoneNumberConfirmed")
+                    .HasColumnType("bit");
 
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("SecurityStamp")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
+                b.Property<bool>("TwoFactorEnabled")
+                    .HasColumnType("bit");
 
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                b.Property<string>("UserName")
+                    .HasColumnType("nvarchar(256)")
+                    .HasMaxLength(256);
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                b.HasIndex("NormalizedEmail")
+                    .HasName("EmailIndex");
 
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                b.HasIndex("NormalizedUserName")
+                    .IsUnique()
+                    .HasName("UserNameIndex")
+                    .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers");
+                b.ToTable("AspNetUsers");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("BaseUser");
-                });
+                b.HasDiscriminator<string>("Discriminator").HasValue("BaseUser");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.Block", b =>
-                {
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("BlockedId")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("BlockedId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ApplicationUserId", "BlockedId");
+                b.HasKey("ApplicationUserId", "BlockedId");
 
-                    b.HasIndex("BlockedId");
+                b.HasIndex("BlockedId");
 
-                    b.ToTable("Blocks");
-                });
+                b.ToTable("Blocks");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.Connection", b =>
-                {
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ConnectedId")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("ConnectedId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ApplicationUserId", "ConnectedId");
+                b.HasKey("ApplicationUserId", "ConnectedId");
 
-                    b.HasIndex("ConnectedId");
+                b.HasIndex("ConnectedId");
 
-                    b.ToTable("Connections");
-                });
+                b.ToTable("Connections");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.ConnectionRequest", b =>
-                {
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ReceiverId")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("ReceiverId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ApplicationUserId", "ReceiverId");
+                b.HasKey("ApplicationUserId", "ReceiverId");
 
-                    b.HasIndex("ReceiverId");
+                b.HasIndex("ReceiverId");
 
-                    b.ToTable("ConnectionRequests");
-                });
+                b.ToTable("ConnectionRequests");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.ConnectorLocation", b =>
-                {
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("LocationId")
-                        .HasColumnType("int");
+                b.Property<int>("LocationId")
+                    .HasColumnType("int");
 
-                    b.HasKey("ApplicationUserId", "LocationId");
+                b.HasKey("ApplicationUserId", "LocationId");
 
-                    b.HasIndex("LocationId");
+                b.HasIndex("LocationId");
 
-                    b.ToTable("ConnectorLocations");
-                });
+                b.ToTable("ConnectorLocations");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.FollowedSite", b =>
-                {
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("SiteId")
-                        .HasColumnType("int");
+                b.Property<int>("SiteId")
+                    .HasColumnType("int");
 
-                    b.HasKey("ApplicationUserId", "SiteId");
+                b.HasKey("ApplicationUserId", "SiteId");
 
-                    b.HasIndex("SiteId");
+                b.HasIndex("SiteId");
 
-                    b.ToTable("FollowedSites");
-                });
+                b.ToTable("FollowedSites");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.FollowedUser", b =>
-                {
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("FollowerId")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("FollowerId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ApplicationUserId", "FollowerId");
+                b.HasKey("ApplicationUserId", "FollowerId");
 
-                    b.HasIndex("FollowerId");
+                b.HasIndex("FollowerId");
 
-                    b.ToTable("FollowedUsers");
-                });
+                b.ToTable("FollowedUsers");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.ReportedUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ReportedId")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("ReportedId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("ReportedId");
+                b.HasIndex("ReportedId");
 
-                    b.ToTable("ReportedUsers");
-                });
+                b.ToTable("ReportedUsers");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.SiteVote", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("SiteId")
-                        .HasColumnType("int");
+                b.Property<int>("SiteId")
+                    .HasColumnType("int");
 
-                    b.Property<bool>("Vote")
-                        .HasColumnType("bit");
+                b.Property<bool>("Vote")
+                    .HasColumnType("bit");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("SiteId");
+                b.HasIndex("SiteId");
 
-                    b.ToTable("SiteVotes");
-                });
+                b.ToTable("SiteVotes");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("ApplicationUserId")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
+                b.Property<int>("PostId")
+                    .HasColumnType("int");
 
-                    b.Property<string>("TaggedId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("TaggedId")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("PostId");
+                b.HasIndex("PostId");
 
-                    b.HasIndex("TaggedId");
+                b.HasIndex("TaggedId");
 
-                    b.ToTable("Tags");
-                });
+                b.ToTable("Tags");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.UserInterest", b =>
-                {
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                b.Property<int>("CategoryId")
+                    .HasColumnType("int");
 
-                    b.HasKey("ApplicationUserId", "CategoryId");
+                b.HasKey("ApplicationUserId", "CategoryId");
 
-                    b.HasIndex("CategoryId");
+                b.HasIndex("CategoryId");
 
-                    b.ToTable("UserInterests");
-                });
+                b.ToTable("UserInterests");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.UserLanguage", b =>
-                {
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("LanguageId")
-                        .HasColumnType("int");
+                b.Property<int>("LanguageId")
+                    .HasColumnType("int");
 
-                    b.HasKey("ApplicationUserId", "LanguageId");
+                b.HasKey("ApplicationUserId", "LanguageId");
 
-                    b.HasIndex("LanguageId");
+                b.HasIndex("LanguageId");
 
-                    b.ToTable("UserLanguages");
-                });
+                b.ToTable("UserLanguages");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.UserNationality", b =>
-                {
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("NationalityId")
-                        .HasColumnType("int");
+                b.Property<int>("NationalityId")
+                    .HasColumnType("int");
 
-                    b.HasKey("ApplicationUserId", "NationalityId");
+                b.HasKey("ApplicationUserId", "NationalityId");
 
-                    b.HasIndex("NationalityId");
+                b.HasIndex("NationalityId");
 
-                    b.ToTable("UserNationalities");
-                });
+                b.ToTable("UserNationalities");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.UserReview", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Review")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Review")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ReviewDate")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime>("ReviewDate")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("ReviewedId")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("ReviewedId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("ReviewedId");
+                b.HasIndex("ReviewedId");
 
-                    b.ToTable("UserReviews");
-                });
+                b.ToTable("UserReviews");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.UserSiteReview", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Review")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Review")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ReviewDate")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime>("ReviewDate")
+                    .HasColumnType("datetime2");
 
-                    b.Property<int>("SiteId")
-                        .HasColumnType("int");
+                b.Property<int>("SiteId")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("SiteId");
+                b.HasIndex("SiteId");
 
-                    b.ToTable("UserSiteReviews");
-                });
+                b.ToTable("UserSiteReviews");
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.ApplicationUser", b =>
-                {
-                    b.HasBaseType("Xperience.Data.Entities.Users.BaseUser");
+            {
+                b.HasBaseType("Xperience.Data.Entities.Users.BaseUser");
 
-                    b.Property<string>("Biography")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Biography")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("ConnectorStatus")
-                        .HasColumnType("bit");
+                b.Property<bool>("ConnectorStatus")
+                    .HasColumnType("bit");
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime>("DateOfBirth")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Gender")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Info")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Info")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("LocationId")
-                        .HasColumnType("int");
+                b.Property<int?>("LocationId")
+                    .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Name")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ProfilePicture")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ReligionId")
-                        .HasColumnType("int");
+                b.Property<int?>("ReligionId")
+                    .HasColumnType("int");
 
-                    b.HasIndex("LocationId");
+                b.HasIndex("LocationId");
 
-                    b.HasIndex("ReligionId");
+                b.HasIndex("ReligionId");
 
-                    b.HasDiscriminator().HasValue("ApplicationUser");
-                });
+                b.HasDiscriminator().HasValue("ApplicationUser");
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationRole", null)
+                    .WithMany()
+                    .HasForeignKey("RoleId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.BaseUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+            {
+                b.HasOne("Xperience.Data.Entities.Users.BaseUser", null)
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.BaseUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+            {
+                b.HasOne("Xperience.Data.Entities.Users.BaseUser", null)
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationRole", null)
+                    .WithMany()
+                    .HasForeignKey("RoleId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("Xperience.Data.Entities.Users.BaseUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Users.BaseUser", null)
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.BaseUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+            {
+                b.HasOne("Xperience.Data.Entities.Users.BaseUser", null)
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Config.Rating", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("Ratings")
-                        .HasForeignKey("ApplicationUserId")
-                        .IsRequired();
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("Ratings")
+                    .HasForeignKey("ApplicationUserId")
+                    .IsRequired();
 
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "Rated")
-                        .WithMany("RatedBy")
-                        .HasForeignKey("RatedId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "Rated")
+                    .WithMany("RatedBy")
+                    .HasForeignKey("RatedId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Posts.Comment", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("Comments")
-                        .HasForeignKey("ApplicationUserId")
-                        .IsRequired();
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("Comments")
+                    .HasForeignKey("ApplicationUserId")
+                    .IsRequired();
 
-                    b.HasOne("Xperience.Data.Entities.Posts.Post", "Post")
-                        .WithMany("Comments")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Posts.Post", "Post")
+                    .WithMany("Comments")
+                    .HasForeignKey("PostId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Posts.Post", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("Posts")
-                        .HasForeignKey("ApplicationUserId");
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("Posts")
+                    .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("Xperience.Data.Entities.Config.Hashtag", "Hashtag")
-                        .WithMany("Posts")
-                        .HasForeignKey("HashtagId");
+                b.HasOne("Xperience.Data.Entities.Config.Hashtag", "Hashtag")
+                    .WithMany("Posts")
+                    .HasForeignKey("HashtagId");
 
-                    b.HasOne("Xperience.Data.Entities.Sites.Site", "Site")
-                        .WithMany("Posts")
-                        .HasForeignKey("SiteId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Sites.Site", "Site")
+                    .WithMany("Posts")
+                    .HasForeignKey("SiteId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Posts.PostReaction", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("PostReactions")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("PostReactions")
+                    .HasForeignKey("ApplicationUserId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
 
-                    b.HasOne("Xperience.Data.Entities.Posts.Post", "Post")
-                        .WithMany("PostReactions")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+                b.HasOne("Xperience.Data.Entities.Posts.Post", "Post")
+                    .WithMany("PostReactions")
+                    .HasForeignKey("PostId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
 
-                    b.HasOne("Xperience.Data.Entities.Config.Reaction", "Reaction")
-                        .WithMany("PostReactions")
-                        .HasForeignKey("ReactionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Config.Reaction", "Reaction")
+                    .WithMany("PostReactions")
+                    .HasForeignKey("ReactionId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Posts.ReportedPost", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("ReportedPosts")
-                        .HasForeignKey("ApplicationUserId");
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("ReportedPosts")
+                    .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("Xperience.Data.Entities.Posts.Post", "Post")
-                        .WithMany("ReportedPosts")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Posts.Post", "Post")
+                    .WithMany("ReportedPosts")
+                    .HasForeignKey("PostId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Sites.ReportedSite", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("ReportedSites")
-                        .HasForeignKey("ApplicationUserId");
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("ReportedSites")
+                    .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("Xperience.Data.Entities.Sites.Site", "Site")
-                        .WithMany("ReportedSites")
-                        .HasForeignKey("SiteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Sites.Site", "Site")
+                    .WithMany("ReportedSites")
+                    .HasForeignKey("SiteId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Sites.Site", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Config.Category", "Category")
-                        .WithMany("Sites")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+            {
+                b.HasOne("Xperience.Data.Entities.Config.Category", "Category")
+                    .WithMany("Sites")
+                    .HasForeignKey("CategoryId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-                    b.HasOne("Xperience.Data.Entities.Config.Location", "Location")
-                        .WithMany("Sites")
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Config.Location", "Location")
+                    .WithMany("Sites")
+                    .HasForeignKey("LocationId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.Block", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("Blocks")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("Blocks")
+                    .HasForeignKey("ApplicationUserId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
 
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "Blocked")
-                        .WithMany("BlockedBy")
-                        .HasForeignKey("BlockedId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "Blocked")
+                    .WithMany("BlockedBy")
+                    .HasForeignKey("BlockedId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.Connection", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("ConnectedTo")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("ConnectedTo")
+                    .HasForeignKey("ApplicationUserId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
 
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "Connected")
-                        .WithMany("Connections")
-                        .HasForeignKey("ConnectedId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "Connected")
+                    .WithMany("Connections")
+                    .HasForeignKey("ConnectedId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.ConnectionRequest", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("SentConnectionRequests")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("SentConnectionRequests")
+                    .HasForeignKey("ApplicationUserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "Receiver")
-                        .WithMany("ReceivedConnectionRequests")
-                        .HasForeignKey("ReceiverId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "Receiver")
+                    .WithMany("ReceivedConnectionRequests")
+                    .HasForeignKey("ReceiverId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.ConnectorLocation", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("ConnectorLocations")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("ConnectorLocations")
+                    .HasForeignKey("ApplicationUserId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
 
-                    b.HasOne("Xperience.Data.Entities.Config.Location", "Location")
-                        .WithMany("ConnectorLocations")
-                        .HasForeignKey("LocationId")
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Config.Location", "Location")
+                    .WithMany("ConnectorLocations")
+                    .HasForeignKey("LocationId")
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.FollowedSite", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("FollowedSites")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("FollowedSites")
+                    .HasForeignKey("ApplicationUserId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
 
-                    b.HasOne("Xperience.Data.Entities.Sites.Site", "Site")
-                        .WithMany("FollowedSites")
-                        .HasForeignKey("SiteId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Sites.Site", "Site")
+                    .WithMany("FollowedSites")
+                    .HasForeignKey("SiteId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.FollowedUser", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("FollowedUsers")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("FollowedUsers")
+                    .HasForeignKey("ApplicationUserId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
 
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "Follower")
-                        .WithMany("FollowedBy")
-                        .HasForeignKey("FollowerId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "Follower")
+                    .WithMany("FollowedBy")
+                    .HasForeignKey("FollowerId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.ReportedUser", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("ReportedUsers")
-                        .HasForeignKey("ApplicationUserId");
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("ReportedUsers")
+                    .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "Reported")
-                        .WithMany("ReportedBy")
-                        .HasForeignKey("ReportedId")
-                        .OnDelete(DeleteBehavior.ClientCascade);
-                });
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "Reported")
+                    .WithMany("ReportedBy")
+                    .HasForeignKey("ReportedId")
+                    .OnDelete(DeleteBehavior.ClientCascade);
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.SiteVote", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("SiteVotes")
-                        .HasForeignKey("ApplicationUserId");
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("SiteVotes")
+                    .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("Xperience.Data.Entities.Sites.Site", "Site")
-                        .WithMany("SiteVotes")
-                        .HasForeignKey("SiteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Sites.Site", "Site")
+                    .WithMany("SiteVotes")
+                    .HasForeignKey("SiteId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.Tag", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("Tags")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("Tags")
+                    .HasForeignKey("ApplicationUserId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
 
-                    b.HasOne("Xperience.Data.Entities.Posts.Post", "Post")
-                        .WithMany("Tags")
-                        .HasForeignKey("PostId")
-                        .IsRequired();
+                b.HasOne("Xperience.Data.Entities.Posts.Post", "Post")
+                    .WithMany("Tags")
+                    .HasForeignKey("PostId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
 
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "Tagged")
-                        .WithMany("TaggedBy")
-                        .HasForeignKey("TaggedId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "Tagged")
+                    .WithMany("TaggedBy")
+                    .HasForeignKey("TaggedId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.UserInterest", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("UserInterests")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("UserInterests")
+                    .HasForeignKey("ApplicationUserId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
 
-                    b.HasOne("Xperience.Data.Entities.Config.Category", "Category")
-                        .WithMany("UserInterests")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Config.Category", "Category")
+                    .WithMany("UserInterests")
+                    .HasForeignKey("CategoryId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.UserLanguage", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("UserLanguages")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("UserLanguages")
+                    .HasForeignKey("ApplicationUserId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
 
-                    b.HasOne("Xperience.Data.Entities.Config.Language", "Language")
-                        .WithMany("UserLanguages")
-                        .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Config.Language", "Language")
+                    .WithMany("UserLanguages")
+                    .HasForeignKey("LanguageId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.UserNationality", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("UserNationalities")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("UserNationalities")
+                    .HasForeignKey("ApplicationUserId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
 
-                    b.HasOne("Xperience.Data.Entities.Config.Nationality", "Nationality")
-                        .WithMany("UserNationalities")
-                        .HasForeignKey("NationalityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Config.Nationality", "Nationality")
+                    .WithMany("UserNationalities")
+                    .HasForeignKey("NationalityId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.UserReview", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("UserReviews")
-                        .HasForeignKey("ApplicationUserId");
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("UserReviews")
+                    .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "Reviewed")
-                        .WithMany("ReviewedBy")
-                        .HasForeignKey("ReviewedId")
-                        .OnDelete(DeleteBehavior.ClientCascade);
-                });
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "Reviewed")
+                    .WithMany("ReviewedBy")
+                    .HasForeignKey("ReviewedId")
+                    .OnDelete(DeleteBehavior.ClientCascade);
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.UserSiteReview", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
-                        .WithMany("UserSiteReviews")
-                        .HasForeignKey("ApplicationUserId");
+            {
+                b.HasOne("Xperience.Data.Entities.Users.ApplicationUser", "ApplicationUser")
+                    .WithMany("UserSiteReviews")
+                    .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("Xperience.Data.Entities.Sites.Site", "Site")
-                        .WithMany("UserSiteReviews")
-                        .HasForeignKey("SiteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                b.HasOne("Xperience.Data.Entities.Sites.Site", "Site")
+                    .WithMany("UserSiteReviews")
+                    .HasForeignKey("SiteId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Xperience.Data.Entities.Users.ApplicationUser", b =>
-                {
-                    b.HasOne("Xperience.Data.Entities.Config.Location", "Location")
-                        .WithMany("ApplicationUsers")
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Restrict);
+            {
+                b.HasOne("Xperience.Data.Entities.Config.Location", "Location")
+                    .WithMany("ApplicationUsers")
+                    .HasForeignKey("LocationId")
+                    .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Xperience.Data.Entities.Config.Religion", "Religion")
-                        .WithMany("ApplicationUsers")
-                        .HasForeignKey("ReligionId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
+                b.HasOne("Xperience.Data.Entities.Config.Religion", "Religion")
+                    .WithMany("ApplicationUsers")
+                    .HasForeignKey("ReligionId")
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
 #pragma warning restore 612, 618
         }
     }

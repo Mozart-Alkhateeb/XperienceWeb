@@ -207,12 +207,7 @@ namespace Xperience.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ApplicationUser", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ApplicationUser_AspNetUsers_Id",
-                        column: x => x.Id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+
                     table.ForeignKey(
                         name: "FK_ApplicationUser_Locations_LocationId",
                         column: x => x.LocationId,
