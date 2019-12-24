@@ -38,9 +38,6 @@ namespace Xperience.Pages.Account
             _emailSender = emailSender;
         }
 
-        public RegisterModel()
-        {
-        }
 
         [BindProperty]
         public InputModel Input { get; set; }
