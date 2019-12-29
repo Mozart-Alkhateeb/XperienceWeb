@@ -80,6 +80,7 @@ var user = {
                 inputElements.isConnector(this.userInfo);
                 inputElements.genderSelect(this.userInfo);
                 this.getLanguages(this.userInfo.id);
+                this.getNationalities(this.userInfo.id);
             }).bind(this)
         })
     },

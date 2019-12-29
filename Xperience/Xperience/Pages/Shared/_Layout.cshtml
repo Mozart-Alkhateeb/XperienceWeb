@@ -46,12 +46,8 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/SiteCategories/Index">Site Categories</a>
                         </li>
-                        @if (signinManager.IsSignedIn(User))
-                        {
-                            <li class="nav-item ml-auto">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/EditUser">@user.UserName</a>
-                            </li>
-                        }
+                            @Html.Partial("_LoginPartial")
+                        
                     </ul>
                 </div>
             </div>

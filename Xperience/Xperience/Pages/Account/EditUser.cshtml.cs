@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Xperience.Data.Entities.Users;
 using Xperience.Data;
 using Xperience.Data.Entities.Config;
+using Microsoft.AspNetCore.Http;
 
 namespace Xperience.Pages.Account
 {
@@ -23,22 +24,13 @@ namespace Xperience.Pages.Account
         private ApplicationUser user;
 
 
-        public EditUserModel(UserManager<BaseUser> userManager, SignInManager<BaseUser> signInManager,
-            ApplicationDbContext context)
-        {
-
-            this.userManager = userManager;
-            this.signInManager = signInManager;
-            this.context = context;
-        }
-
-
-
         [BindProperty]
         public InputModel input { get; set; } = new InputModel();
 
         public class InputModel
         {
+            public IFormFile image { get; set; }
+
             public string name { get; set; }
 
             public DateTime DOB { get; set; }
@@ -55,14 +47,26 @@ namespace Xperience.Pages.Account
 
             public Boolean isConnector { get; set; }
 
-            public List<int> languages { get; set; }
+            public List<int> languages { get; set; } = new List<int>();
 
-            public List<int> Nationalities { get; set;}
+            public List<int> Nationalities { get; set;} = new List<int>();
+        }
+
+        public EditUserModel(UserManager<BaseUser> userManager, SignInManager<BaseUser> signInManager,
+            ApplicationDbContext context)
+        {
+
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+            this.context = context;
         }
 
         public async Task OnGetAsync()
         {
             currentUser = await userManager.GetUserAsync(HttpContext.User);
+
+
+
             user = context.Users.OfType<ApplicationUser>().FirstOrDefault(x => x.Id == currentUser.Id);
             input.Biography = user.Biography;
             input.Info = user.Info;

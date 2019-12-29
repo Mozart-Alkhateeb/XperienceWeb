@@ -159,6 +159,7 @@
     <None Include="wwwroot\lib\chosen.js\docsupport\prism.js" />
     <None Include="wwwroot\lib\chosen.js\docsupport\prototype-1.7.0.0.js" />
     <None Include="wwwroot\lib\chosen.js\LICENSE.md" />
+    <None Include="wwwroot\Images\Uploads\2bc83d70-d236-492f-8808-505e06b07a4f.JPG" />
   </ItemGroup>
 
 </Project>

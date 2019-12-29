@@ -11,7 +11,7 @@ namespace Xperience.Data.Entities.Sites
     {
         [Column(Order = 1)]
         [Required]
-        public int Name { get; set; }
+        public string Name { get; set; }
 
         [Column(Order = 2)]
         [Required]
