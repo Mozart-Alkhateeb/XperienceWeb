@@ -39,18 +39,26 @@ namespace Xperience.Controllers
         [HttpPost]
         public async Task<ActionResult> PostAsync(ManageUserModel newUser)
         {
-            var user = new ApplicationUser
+            try
             {
-                UserName = newUser.UserName,
-                Email = newUser.Email,
-                DateOfBirth = newUser.DateOfBirth,
-                Gender = newUser.Gender
-            };
+                var user = new ApplicationUser
+                {
+                    UserName = newUser.UserName,
+                    Email = newUser.Email,
+                    DateOfBirth = newUser.DateOfBirth,
+                    Gender = newUser.Gender
+                };
 
-            var result = await _userManager.CreateAsync(user, newUser.Password);
+                var result = await _userManager.CreateAsync(user, newUser.Password);
 
-            _dbContext.SaveChanges();
-            return Ok();
+                _dbContext.SaveChanges();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+           
         }
         [HttpGet]
         public async Task<IActionResult> OnGetAsync()
