@@ -8,89 +8,110 @@
     var user = context.Users.OfType<ApplicationUser>().FirstOrDefault(x => x.Id == currentUser.Id);
 }
 
-<h1>EditUser</h1>
-<h3>@currentUser.UserName</h3>
+
 
 @{
 
 }
 
-<form method="post">
-    <table id="UserTable">
-        <tr>
-            <td>Username : </td>
-            <td><input readonly value="@user.UserName"  class="EditUserInput inputElement" /></td>
-        </tr>
-        <tr>
-            <td>Name : </td>
-            <td><input readonly value="@user.Name" class="EditUserInput inputElement" asp-for="input.name" /></td>
-        </tr>
-        <tr>
-            <td> D.O.B : </td>
-            <td><input type="date" value="@user.DateOfBirth.ToString("yyyy-MM-dd")" readonly class="EditUserInput inputElement" asp-for="input.DOB" /></td>
-        </tr>
-        <tr>
-            <td>Gender : </td>
-            <td>
-                <select disabled id="gender" class="EditUserInput selectInput inputElement" asp-for="input.gender">
+<div class="row">
+
+    
+
+    <div class="col-md-6">
+        <div class="title">
+            <h1>EditUser</h1>
+            <h3>@currentUser.UserName</h3>
+        </div>
+        <form method="post" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label asp-for="input.image"></label>
+                <div class="custom-file">
+                    <input asp-for="input.image" class="form-control custom-file-input" disabled/>
+                    <label class="custom-file-label">Chooses File...</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Username </label>
+                <input readonly value="@user.UserName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="input.name"></label>
+                <input readonly value="@user.Name" class="EditUserInput inputElement form-control" asp-for="input.name" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="input.DOB"></label>
+                <input type="date" value="@user.DateOfBirth.ToString("yyyy-MM-dd")" readonly class="EditUserInput inputElement form-control" asp-for="input.DOB" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="input.gender"></label>
+                <select disabled id="gender" class="EditUserInput selectInput inputElement form-control" asp-for="input.gender">
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                 </select>
-            </td>
-        </tr>
-        <tr>
-            @{
-                var Rel = context.Religions.FirstOrDefault(x => x.Id == user.ReligionId)?.Name;
-            }
-            <td>Religion : </td>
-            <td><input readonly value="@Rel" class="EditUserInput inputElement" asp-for="input.Religion" /></td>
-        </tr>
-        <tr>
-            @{
-                var Loc = context.Locations.FirstOrDefault(x => x.Id == user.LocationId)?.Name;
-            }
-            <td>Location : </td>
-            <td><input readonly value="@Loc" class="EditUserInput inputElement" asp-for="input.Location" /></td>
-        </tr>
-        <tr>
-            <td>Languages : </td>
-            <td>
-                <select asp-for="input.languages" class="langs selectInput" multiple>
-                  @foreach (var item in context.Languages) { 
-                    <option id="lang-@item.Id" value="@item.Id">@item.Name</option>
-                  }
+            </div>
+
+            <div class="form-group">
+                @{
+                    var Rel = context.Religions.FirstOrDefault(x => x.Id == user.ReligionId)?.Name;
+                }
+                <label asp-for="input.Religion"></label>
+                <input readonly value="@Rel" class="EditUserInput inputElement form-control" asp-for="input.Religion" />
+            </div>
+
+            <div class="form-group">
+                @{
+                    var Loc = context.Locations.FirstOrDefault(x => x.Id == user.LocationId)?.Name;
+                }
+                <label asp-for="input.Location"></label>
+                <input readonly value="@Loc" class="EditUserInput inputElement form-control" asp-for="input.Location" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="input.languages"></label>
+                <select asp-for="input.languages" class="langs selectInput form-control" multiple>
+                    @foreach (var item in context.Languages)
+                    {
+                        <option id="lang-@item.Id" value="@item.Id">@item.Name</option>
+                    }
                 </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Nationalities : </td>
-            <td>
-                <select asp-for="input.Nationalities" class="nations selectInput" multiple>
-                    @foreach (var item in context.Nationalities) { 
+            </div>
+
+            <div class="form-group">
+                <label asp-for="input.Nationalities"></label> 
+                <select asp-for="input.Nationalities" class="nations selectInput form-control" multiple>
+                    @foreach (var item in context.Nationalities)
+                    {
                         <option id="nation-@item.Id" value="@item.Id">@item.Name</option>
                     }
                 </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Biography : </td>
-            <td><textarea readonly asp-for="input.Biography" class="inputElement">@user.Biography</textarea></td>
-        </tr>
-        <tr>
-            <td>Conntector : </td>
-            <td>
-                <input disabled type="checkbox" id="isConnector" class="selectInput" asp-for="input.isConnector" />
-            </td>
-        </tr>
-        <tr id="info">
-            <td>Info : </td>
-            <td>
-                <textarea readonly asp-for='input.Info' class="inputElement">@user.Info</textarea>
-            </td>
-        </tr>
-    </table>
-    <button type="submit" class="btn btn-danger" id="saveButton">Save</button>
-</form>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="input.Biography"></label>
+                <textarea readonly asp-for="input.Biography" class="inputElement form-control">@user.Biography</textarea>
+            </div>
+
+            <div class="checkbox">
+                <label asp-for="input.isConnector"><input disabled type="checkbox" id="isConnector" class="selectInput" asp-for="input.isConnector" /></label>
+                
+            </div>
+            <div class="form-group" id="info">
+                <label asp-for="input.Info"></label>
+                <textarea readonly asp-for='input.Info' class="inputElement form-control">@user.Info</textarea>
+            </div>
+
+            <button type="submit" class="btn btn-danger" id="saveButton">Save</button>
+        </form>
+    </div>
+
+
+</div>
 <input type="button" value="Edit" class="btn btn-primary editButton" />
 
 <form action="/Account/ChangePassword">

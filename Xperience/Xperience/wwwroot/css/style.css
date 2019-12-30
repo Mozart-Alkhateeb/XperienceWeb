@@ -27,7 +27,14 @@
     background-color : rgba(255,255,255,0.5);
 }
 
-.EditUserInput {
+.EditUserInput  {
     border : none;
     outline : none;
 }
+
+.post {
+    border: 2px solid black;
+    height: 2000px;
+    padding-bottom: 30px;
+}
+

@@ -1,10 +1,25 @@
 ﻿@page
 @model feedsModel
-@{
-    ViewData["Title"] = "Log out";
-}
+@inject SignInManager<BaseUser> signinManager
+@inject UserManager<BaseUser> userManager
+@inject Xperience.Data.ApplicationDbContext context
 
-<header>
-    <h1>@ViewData["Title"]</h1>
-    <p>You have successfully logged into the the application.</p>
-</header>
+
+@{ 
+    var currentUser = await userManager.GetUserAsync(HttpContext.User);
+    var user = currentUser != null ? context.Users.OfType<ApplicationUser>().FirstOrDefault(x => x.Id == currentUser.Id) : null;
+
+    
+}  
+
+
+    <div class="posts">
+
+    </div>
+
+
+
+    <script type="text/javascript" src="~/js/feeds.js"></script>
+
+
+

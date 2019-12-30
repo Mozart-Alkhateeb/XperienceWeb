@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Xperience.Data.Entities.Config;
@@ -32,6 +33,10 @@ namespace Xperience.Data.Entities.Posts
         [ForeignKey("HashtagId")]
         public Hashtag Hashtag { get; set; }
         #endregion
+
+
+        [Column(Order = 6)]
+        public DateTime postDate { get; set; }
 
         #region N.P
 

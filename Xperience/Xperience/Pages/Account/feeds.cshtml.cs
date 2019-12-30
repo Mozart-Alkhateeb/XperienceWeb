@@ -11,9 +11,7 @@ namespace Xperience.Pages.Account
     [Authorize]
     public class feedsModel : PageModel
     {
-        public void OnGet()
-        {
 
-        }
+
     }
 }

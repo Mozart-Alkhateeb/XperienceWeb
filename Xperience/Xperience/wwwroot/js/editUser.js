@@ -62,7 +62,8 @@
         addNationalities: function (userNationalities) {
             $.each(userNationalities, function (i, item) {
                 $('#nation-' + item.id).attr('selected', true);
-            })
+            });
+            this.$input.trigger("chosen:updated");
         }
     }
 var user = {
@@ -79,6 +80,7 @@ var user = {
                 inputElements.isConnector(this.userInfo);
                 inputElements.genderSelect(this.userInfo);
                 this.getLanguages(this.userInfo.id);
+                this.getNationalities(this.userInfo.id);
             }).bind(this)
         })
     },
