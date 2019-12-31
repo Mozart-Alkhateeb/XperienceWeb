@@ -13,13 +13,40 @@
 }  
 
 
-    <div class="posts">
+<div class="add-Post">
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Post Details</label> <!--This should be a file-->
+                <input id="post_details" />
+            </div>
+            <div class="form-group">
+                <label>Caption</label> 
+                <input id="caption" />
+            </div>
+            <div class="form-group">
+                <label>Site</label> <!--This should be a chosen select-->
+                <input id="site" /> <!--User can add new sites-->
+            </div>
+            <div class="form-group">
+                <label>Hashtag</label> <!--A hashtag must not be accepted if it ddes not start with '#'-->
+                <input id="hashtag" />
+            </div>
 
+            <input type="button" value="Add Post" id="add_post" />
+        </div>
     </div>
+</div>   
 
 
+<div class="posts">
 
-    <script type="text/javascript" src="~/js/feeds.js"></script>
+</div>
+
+
+<script type="text/javascript" src="~/js/feeds.js"></script>
 
 
 
