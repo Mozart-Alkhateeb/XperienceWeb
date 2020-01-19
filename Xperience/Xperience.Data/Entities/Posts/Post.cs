@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Xperience.Data.Entities.Config;
 using Xperience.Data.Entities.Sites;
 using Xperience.Data.Entities.Users;
 
@@ -28,10 +27,6 @@ namespace Xperience.Data.Entities.Posts
         [ForeignKey("SiteId")]
         public Site Site { get; set; }
 
-        [Column(Order = 5)]
-        public int? HashtagId { get; set; } // ? means that this can be null
-        [ForeignKey("HashtagId")]
-        public Hashtag Hashtag { get; set; }
         #endregion
 
 
@@ -44,7 +39,7 @@ namespace Xperience.Data.Entities.Posts
 
         public ICollection<ReportedPost> ReportedPosts { get; set; }
         public ICollection<Comment> Comments { get; set; }
-
+        public ICollection<PostHashtag> PostHashtags { get; set; }
 
         public ICollection<Tag> Tags { get; set; }
       

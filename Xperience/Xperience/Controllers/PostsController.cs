@@ -51,7 +51,6 @@ namespace Xperience.Controllers
                 id = x.Id,
                 name = x.ApplicationUser.Name,
                 site = x.Site.Name,
-                hashtag = x.Hashtag.Name,
                 postDetails = x.PostDetails,
                 postDate = x.postDate,
                 caption = x.Caption
@@ -82,7 +81,6 @@ namespace Xperience.Controllers
                  ApplicationUserId = _userManager.GetUserId(HttpContext.User),
                  Caption = newPost.Caption,
                  SiteId = context.Sites.FirstOrDefault(x => x.Name == newPost.Site).Id,
-                 HashtagId = context.Hashtags.FirstOrDefault(x => x.Name == newPost.Hashtag).Id,
                  postDate = DateTime.Now
              };
 

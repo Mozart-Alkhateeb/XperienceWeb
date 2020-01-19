@@ -27,6 +27,7 @@ namespace Xperience.Data
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostReaction> PostReactions { get; set; }
         public DbSet<ReportedPost> ReportedPosts { get; set; }
+        public DbSet<PostHashtag> PostHashtags { get; set; }
         #endregion
 
         #region Sites
@@ -67,6 +68,17 @@ namespace Xperience.Data
 
             #region Delete
 
+            //Amena added delete PostHashtag
+            modelBuilder.Entity<Post>()
+               .HasMany(q => q.PostHashtags)
+               .WithOne(q => q.Post)
+               .OnDelete(DeleteBehavior.ClientCascade);
+
+            //Amena added delete PostHashtag2
+            modelBuilder.Entity<Hashtag>()
+               .HasMany(q => q.PostHashtags)
+               .WithOne(q => q.Hashtag)
+               .OnDelete(DeleteBehavior.ClientCascade);
 
             // Delete PostReactions
             modelBuilder.Entity<Post>()
@@ -278,10 +290,11 @@ namespace Xperience.Data
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
             //amena added Keep Posts
-            modelBuilder.Entity<Hashtag>()
-             .HasMany(q => q.Posts)
-             .WithOne(q => q.Hashtag)
-             .OnDelete(DeleteBehavior.ClientSetNull);
+           /* modelBuilder.Entity<Post>()
+             .HasMany(q => q.PostHashtags)
+             .WithOne(q => q.Post)
+             .OnDelete(DeleteBehavior.ClientSetNull);*/
+
 
             //amena added delete tags keep post
             modelBuilder.Entity<Tag>()
@@ -374,6 +387,10 @@ namespace Xperience.Data
 
             modelBuilder.Entity<UserNationality>()
                 .HasKey(q => new { q.ApplicationUserId, q.NationalityId });
+
+            modelBuilder.Entity<PostHashtag>()
+             .HasKey(q => new { q.PostId, q.HashtagId });
+
             #endregion
         }
 

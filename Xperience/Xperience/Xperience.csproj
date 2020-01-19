@@ -6,9 +6,13 @@
 
   <ItemGroup>
     <Compile Remove="bin\**" />
+    <Compile Remove="NewFolder\**" />
     <Content Remove="bin\**" />
+    <Content Remove="NewFolder\**" />
     <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
     <None Remove="bin\**" />
+    <None Remove="NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,7 +54,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="NewFolder\" />
     <Folder Include="Pages\Users\" />
     <Folder Include="Pages\User_Reviews\" />
     <Folder Include="wwwroot\Images\PostPictures\" />

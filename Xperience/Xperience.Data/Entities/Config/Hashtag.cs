@@ -11,8 +11,7 @@ namespace Xperience.Data.Entities.Config
         public string Name { get; set; }
 
         #region N.P
-
-        public ICollection <Post> Posts { get; set; }
+        public ICollection<PostHashtag> PostHashtags { get; set; }
         #endregion
     }
 }
