@@ -1,6 +1,7 @@
 ﻿@inject SignInManager<BaseUser> signinManager
 @inject UserManager<BaseUser> userManager
 @inject Xperience.Data.ApplicationDbContext context
+@using React.AspNet
 @{
 
 
@@ -17,11 +18,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/css/style.css" rel="stylesheet" />
-    <link href="~/lib/chosen.js/chosen.css" rel="stylesheet"/>
+    <link href="~/lib/chosen.js/chosen.css" rel="stylesheet" />
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="~/lib/chosen.js/chosen.jquery.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
 </head>
 <body>
     <header>
@@ -46,8 +45,8 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/SiteCategories/Index">Site Categories</a>
                         </li>
-                            @Html.Partial("_LoginPartial")
-                        
+                        @Html.Partial("_LoginPartial")
+
                     </ul>
                 </div>
             </div>
