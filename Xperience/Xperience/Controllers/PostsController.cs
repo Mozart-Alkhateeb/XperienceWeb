@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Xperience.APIModels;
 using Xperience.Data.Entities.Posts;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace Xperience.Controllers
 {
@@ -20,14 +22,14 @@ namespace Xperience.Controllers
 
         private readonly ApplicationDbContext context;
         private readonly UserManager<BaseUser> _userManager;
-        private BaseUser currentUser;
-        private ApplicationUser user;
+        private readonly IWebHostEnvironment enviromentServices;
 
 
-        public PostsController(ApplicationDbContext dbContext, UserManager<BaseUser> userManager)
+        public PostsController(ApplicationDbContext dbContext, UserManager<BaseUser> userManager, IWebHostEnvironment hostEnvironment)
         {
             context = dbContext;
             _userManager = userManager;
+            enviromentServices = hostEnvironment;
         }
 
         [HttpPost("{pageNumber},{nOfPosts}")]
@@ -41,30 +43,51 @@ namespace Xperience.Controllers
             var posts = context.Posts
             .Where(x => (context.FollowedUsers
             .FirstOrDefault(n => n.FollowerId == Id && n.ApplicationUserId == x.ApplicationUserId)) != null
-            || (context.FollowedSites.FirstOrDefault(n => n.ApplicationUserId == Id && n.SiteId == x.SiteId) != null) || x.ApplicationUserId == Id)
-            .OrderByDescending(x => x.postDate).Skip(skip).Take(nOfPosts).ToList();
+            || (context.FollowedSites.FirstOrDefault(n => n.ApplicationUserId == Id && n.SiteId == x.SiteId) != null)
+            || x.ApplicationUserId == Id)
+            .Skip(skip)
+            .Select(x => new
+            {
+                id = x.Id,
+                name = x.ApplicationUser.Name,
+                site = x.Site.Name,
+                hashtag = x.Hashtag.Name,
+                postDetails = x.PostDetails,
+                postDate = x.postDate,
+                caption = x.Caption
+            })
+            .OrderByDescending(x => x.postDate).Take(nOfPosts).ToList();
+
+
 
             return Ok(posts);
 
         }
 
+
+
         [HttpPost]
-        public async void OnPostAsync(ManagePostModel newPost)
+        public async Task OnPostAsync([FromForm]ManagePostModel newPost)
         {
+            string upload = Path.Combine(enviromentServices.WebRootPath, "Images");
+            upload = Path.Combine(upload, "PostPictures");
+            string fileName = Guid.NewGuid().ToString() + "_" + newPost.PostDetails.FileName;
+            upload = Path.Combine(upload, fileName);
+            newPost.PostDetails.CopyTo(new FileStream(upload, FileMode.Create));
 
 
-            var post = new Post()
-            {
-                PostDetails = newPost.PostDetails,
-                ApplicationUserId = _userManager.GetUserId(HttpContext.User),
-                Caption = newPost.Caption,
-                SiteId = context.Sites.FirstOrDefault(x => x.Name == newPost.Site).Id,
-                HashtagId = context.Hashtags.FirstOrDefault(x => x.Name == newPost.Hashtag).Id,
-                postDate = DateTime.Now
-            };
+             var post = new Post()
+             {
+                 PostDetails = fileName,
+                 ApplicationUserId = _userManager.GetUserId(HttpContext.User),
+                 Caption = newPost.Caption,
+                 SiteId = context.Sites.FirstOrDefault(x => x.Name == newPost.Site).Id,
+                 HashtagId = context.Hashtags.FirstOrDefault(x => x.Name == newPost.Hashtag).Id,
+                 postDate = DateTime.Now
+             };
 
-            await context.AddAsync(post);
-            context.SaveChanges();
+             await context.AddAsync(post);
+             await context.SaveChangesAsync();
         }
 
     }

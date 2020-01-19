@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +10,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Xperience.Data;
 using Xperience.Data.Entities.Users;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+
+
+
 
 namespace Xperience
 {
@@ -38,10 +40,15 @@ namespace Xperience
                 options.Cookie.IsEssential = true;
             });
 
-            services.AddSwaggerGen(c =>
+           services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+            });
+
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "client_app/build";
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -94,11 +101,14 @@ namespace Xperience
             services.AddRazorPages().AddRazorPagesOptions(options =>
             {
                 options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
-                options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
+                options.Conventions.AuthorizeAreaPage("Identity", "/");
             });
             services.AddControllersWithViews();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            
+            services.AddMvc();
 
         }
 
@@ -135,7 +145,11 @@ namespace Xperience
             });
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+
+
+
+
+            app.UseSpaStaticFiles();
 
 
 
@@ -151,7 +165,17 @@ namespace Xperience
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapRazorPages();
+            });
+
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "client_app";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseReactDevelopmentServer(npmScript: "start");
+                }
             });
         }
     }

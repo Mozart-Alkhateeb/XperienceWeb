@@ -14,6 +14,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Xperience.Data\Xperience.Data.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <None Remove="client_app\node_modules\**" />
+  <Content Remove="client_app\node_modules\**" />
+  </ItemGroup>
 
  <ItemGroup>
       <Content Update="appsettings.json">
@@ -22,10 +27,15 @@
    </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore" Version="3.3.0" />
+    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.win-x64" Version="3.3.0" />
+    <PackageReference Include="JavaScriptEngineSwitcher.Extensions.MsDependencyInjection" Version="3.3.0" />
     <PackageReference Include="Microsoft.AspNet.Identity.Owin" Version="2.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0">
       <PrivateAssets>all</PrivateAssets>
@@ -33,14 +43,18 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+    <PackageReference Include="React.AspNet" Version="5.1.2" />
     <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.0.0-rc4" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="NewFolder\" />
     <Folder Include="Pages\Users\" />
     <Folder Include="Pages\User_Reviews\" />
+    <Folder Include="wwwroot\Images\PostPictures\" />
+    <Folder Include="wwwroot\Images\ProfilePictures\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -159,7 +173,6 @@
     <None Include="wwwroot\lib\chosen.js\docsupport\prism.js" />
     <None Include="wwwroot\lib\chosen.js\docsupport\prototype-1.7.0.0.js" />
     <None Include="wwwroot\lib\chosen.js\LICENSE.md" />
-    <None Include="wwwroot\Images\Uploads\2bc83d70-d236-492f-8808-505e06b07a4f.JPG" />
   </ItemGroup>
 
 </Project>

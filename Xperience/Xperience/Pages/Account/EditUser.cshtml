@@ -28,7 +28,7 @@
             <div class="form-group">
                 <label asp-for="input.image"></label>
                 <div class="custom-file">
-                    <input asp-for="input.image" class="form-control custom-file-input" disabled/>
+                    <input asp-for="input.image" class="form-control custom-file-input"/>
                     <label class="custom-file-label">Chooses File...</label>
                 </div>
             </div>
@@ -97,9 +97,9 @@
                 <textarea readonly asp-for="input.Biography" class="inputElement form-control">@user.Biography</textarea>
             </div>
 
-            <div class="checkbox">
-                <label asp-for="input.isConnector"><input disabled type="checkbox" id="isConnector" class="selectInput" asp-for="input.isConnector" /></label>
-                
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input selectInput" id="isConnector" asp-for="input.isConnector" disabled>
+                <label class="custom-control-label" for="switch1" asp-for="input.isConnector"></label>
             </div>
             <div class="form-group" id="info">
                 <label asp-for="input.Info"></label>

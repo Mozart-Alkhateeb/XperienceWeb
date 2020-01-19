@@ -11,6 +11,8 @@ using Xperience.Data.Entities.Users;
 using Xperience.Data;
 using Xperience.Data.Entities.Config;
 using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Xperience.Pages.Account
 {
@@ -20,6 +22,7 @@ namespace Xperience.Pages.Account
         private readonly UserManager<BaseUser> userManager;
         private readonly SignInManager<BaseUser> signInManager;
         private readonly ApplicationDbContext context;
+        private readonly IWebHostEnvironment enviromentServices;
         private BaseUser currentUser;
         private ApplicationUser user;
 
@@ -53,12 +56,13 @@ namespace Xperience.Pages.Account
         }
 
         public EditUserModel(UserManager<BaseUser> userManager, SignInManager<BaseUser> signInManager,
-            ApplicationDbContext context)
+            ApplicationDbContext context, IWebHostEnvironment enviromentServices)
         {
 
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.context = context;
+            this.enviromentServices = enviromentServices;
         }
 
         public async Task OnGetAsync()
@@ -169,6 +173,14 @@ namespace Xperience.Pages.Account
                     };
                     await context.UserNationalities.AddAsync(nation);
                 }
+            }
+
+            if (input.image != null) {
+                string upload = Path.Combine(enviromentServices.WebRootPath, "Images");
+                upload = Path.Combine(upload, "ProfilePictures");
+                string fileName = Guid.NewGuid().ToString() + "_" + input.image.FileName;
+                upload = Path.Combine(upload, fileName);
+                input.image.CopyTo(new FileStream(upload, FileMode.Create));
             }
             var result = await userManager.UpdateAsync(user);
             await context.SaveChangesAsync();

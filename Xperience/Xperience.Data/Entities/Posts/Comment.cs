@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Xperience.Data.Entities.Users;
 
@@ -20,5 +21,6 @@ namespace Xperience.Data.Entities.Posts
 
         [Column(Order = 3), Required]
         public string CommentDetails { get; set; }
+        public DateTime date { get; set; }
     }
 }

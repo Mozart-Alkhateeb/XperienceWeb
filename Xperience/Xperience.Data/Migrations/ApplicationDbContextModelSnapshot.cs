@@ -283,6 +283,9 @@ namespace Xperience.Data.Migrations
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("date")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
