@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import LeftSidebar from './Layout_Components/sidebar.js';
 import TopNavbar from './Layout_Components/navbar.js';
 
 class Root extends Component {

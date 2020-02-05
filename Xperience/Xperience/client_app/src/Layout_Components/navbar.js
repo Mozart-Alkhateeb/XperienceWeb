@@ -1,55 +1,35 @@
 import React, { Component } from 'react'
 import { Header, Icon, Image, Menu, Segment, Label, Input, Button } from 'semantic-ui-react'
+import 'semantic-ui-css'
+import { Navbar, Nav, Form ,FormControl} from 'react-bootstrap'
 
 class TopNavbar extends Component {
-    constructor(){
+    constructor() {
         super();
         this.state = {
-            Name : "profile"
+            Name: "profile"
         }
     }
-    setActive(e , {name}){
+    setActive(e, { name }) {
         this.setState(state => ({
-            Name : name
+            Name: name
         }))
     }
     render() {
         return (
-
-            <Menu style={{ height: 5 + "rem" }}>
-                <Menu.Menu>
-                    <Menu.Item
-                        name="feeds"
-                        active = {this.state.Name === "feeds"}
-                        onClick = {this.setActive.bind(this)}
-                    ><Icon name="feed"/> Feeds</Menu.Item>
-                    <Menu.Item
-                        name="Notfs"
-                        active = {this.state.Name === "Notfs"}
-                        onClick = {this.setActive.bind(this)}
-                    ><Icon name="bell"/> Notifications</Menu.Item>
-                    <Menu.Item
-                        name="Xplore"
-                        active = {this.state.Name === "Xplore"}
-                        onClick = {this.setActive.bind(this)}
-                    ><Icon name="location arrow"/>Xplore</Menu.Item>
-                    <Menu.Item
-                        name="profile"
-                        active = {this.state.Name === "profile"}
-                        onClick = {this.setActive.bind(this)}
-                    ><Icon name="user circle" /> Profile</Menu.Item>
-                </Menu.Menu>
-                <Menu.Menu position="right">
-                    <Menu.Item>
-                        <Input icon="search" placeholder="search..." />
-                    </Menu.Item>
-                    <Menu.Item>
-                        <Button icon positive>
-                            <Icon name="paper plane" />
-                        </Button>
-                    </Menu.Item>
-                </Menu.Menu>
-            </Menu>
+            <Navbar bg="dark" variant="dark" style={{ height: "4rem" }}>
+                <Navbar.Brand>Xperience</Navbar.Brand>
+                <Nav className='mr-auto'>
+                    <Nav.Link><Icon name="feed" />Feeds</Nav.Link>
+                    <Nav.Link><Icon name="location arrow" />Xplore</Nav.Link>
+                    <Nav.Link><Icon name="bell" /> Notifications</Nav.Link>
+                    <Nav.Link><Icon name="user outline" /> Profile</Nav.Link>
+                </Nav>
+                <Form inline>
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                    <Button variant="outline-info">Search</Button>
+                </Form>
+            </Navbar>
         )
     }
 }

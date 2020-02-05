@@ -1,55 +1,88 @@
 import React, { Component } from 'react'
-import { Modal, Confirm, Button, Form } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react'
+import 'semantic-ui-css'
+import { Modal, Button, Form } from 'react-bootstrap'
+import { Multiselect } from 'multiselect-react-dropdown';
 
-const modalStyle = {
-    //height: '90%'
-}
+
+const renderLabel = (label) => ({
+    color: 'blue',
+    content: `Customized label - ${label.text}`,
+    icon: 'check',
+})
+
 
 class EditAccount extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            confirmOpen: false
+            isOpen: false,
+            options: [{ name: 'Srigar', id: 1 }, { name: 'Sam', id: 2 }],
+            selectedValue : []
         }
     }
 
-    close(){
-        this.setState(state => ({confirmOpen : false}));
+    change(open) {
+        this.setState(state => ({
+            isOpen: open
+        }))
     }
-    open(){
-        this.setState(state => ({confirmOpen : true}));
+
+    onMultiSelect(selectedList, selectedItem) {
+
+    }
+
+    onMultiRemove(selectedList, removedItem) {
+
     }
 
     render() {
         return (
             <div>
-                <Modal size="tiny" open={this.props.isOpen} style={modalStyle}>
-                    <Modal.Header icon="edit" content="Edit Account" />
-                    <Modal.Content scrolling>
-                        <Modal.Description>
-                            <Form>
-                                <Form.Input label="Username" />
-                                <Form.Input label="Name" />
-                                <Form.Input label="DOB" />
-                                <Form.Input label="Gender" />
-                                <Form.Input label="location" />
-                                <Form.Input label="langs" />
-                                <Form.Input label="Nations" />
-                                <Form.Input label="Biography" />
-                                <Form.Input label="Info" />
-                            </Form>
-                        </Modal.Description>
-                    </Modal.Content>
-                    <Modal.Actions>
-                        <Button color='green' onClick={this.open.bind(this)}>Save</Button>
-                        <Button color='red' onClick={this.props.closeModal}>Close</Button>
-                    </Modal.Actions>
+                <Modal
+                    size="md"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                    show={this.state.isOpen}
+                >
+                    <Modal.Header>
+                        <Modal.Title><Icon name='user' />Edit User</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body style={{ maxHeight: "30rem", overflowY: "scroll" }}>
+                        <Form>
+                            <Form.Group>
+                                <Form.Label>Username</Form.Label>
+                                <Form.Control type='text' />
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control type='text' />
+                                <Form.Label>D.O.B</Form.Label>
+                                <Form.Control type='date' />
+                                <Form.Label>Gender</Form.Label>
+                                <Form.Control as='select'>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </Form.Control>
+                                <Form.Label>Location</Form.Label>
+                                <Form.Control type='text' />
+                                <Form.Label>Languages</Form.Label>
+                                <div>
+                                    <Multiselect
+                                        options={this.state.options} // Options to display in the dropdown
+                                        selectedvalues={this.state.selectedValue} // Preselected value to persist in dropdown
+                                        onSelect={this.onMultiSelect} // Function will trigger on select event
+                                        onRemove={this.onMultiRemove} // Function will trigger on remove event
+                                        displayValue="name" // Property name to display in the dropdown options
+                                    />
+                                </div>
+
+                            </Form.Group>
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button>Save</Button>
+                        <Button className="btn-danger">Cancel</Button>
+                    </Modal.Footer>
                 </Modal>
-                <Confirm
-                    open={this.state.confirmOpen}
-                    onCancel={this.close.bind(this)}
-                    onConfirm={this.close.bind(this)}
-                />
             </div>
         )
     }

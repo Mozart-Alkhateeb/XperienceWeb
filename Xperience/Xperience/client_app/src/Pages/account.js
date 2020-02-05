@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Header, Icon, Image, Menu, Segment, Label, Input, Button } from 'semantic-ui-react'
+import { Header, Icon, Button } from 'semantic-ui-react'
 import { Row, Col, Container } from 'react-bootstrap'
-import 'react-bootstrap'
+import 'semantic-ui-css'
 import EditAccount from './EditAccount'
 
 class Account extends Component {
@@ -41,8 +41,8 @@ class Account extends Component {
                     <Row className='justify-content-md-center'>
                         <Col sm={2} >
                             <Header icon>
-                                <Button icon style={{ height: '150px', width: '150px', background: 'rgba(0,0,0,0)' }}>
-                                    <Icon name='user circle' />
+                                <Button icon style={{ height: '10rem', width: '10rem', background: 'rgba(0,0,0,0)' }}>
+                                    <Icon name='user outline' />
                                 </Button>
                             </Header>
                         </Col>

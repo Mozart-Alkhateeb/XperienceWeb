@@ -4,9 +4,10 @@ import Root from './root'
 import Account from './Pages/account'
 import Register from './Pages/register'
 import Index from './Pages/index'
-import { BrowserRouter as Router, Route, Switch,Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import Login from './Pages/login';
-import 'bootstrap/dist/css/bootstrap-grid.min.css';
+import EditAccount from './Pages/EditAccount'
+import 'bootstrap/dist/css/bootstrap.css';
 
 
 class App extends Component {
@@ -19,23 +20,24 @@ class App extends Component {
 
     render() {
         return <div>
-             <Router>
+
+            <Router>
                 <Switch>
-                    <Route exact path = {"/"}> 
+                    <Route exact path={"/"}>
                         <Redirect to={"/register"} />
                     </Route>
                     <Route path={"/account"}>
-                        <Root/>
-                        <Account/>
+                        <Root />
+                        <Account />
                     </Route>
                     <Route path={"/register"}>
                         <Index>
-                            <Register/>
+                            <Register />
                         </Index>
                     </Route>
                     <Route path={"/login"}>
                         <Index>
-                            <Login/>
+                            <Login />
                         </Index>
                     </Route>
                 </Switch>
