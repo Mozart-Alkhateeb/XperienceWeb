@@ -24,13 +24,11 @@ class Account extends Component {
     }
     openModal(){
         this.setState(state =>({
-            user : this.state.user,
             ModalOpen : true
         }))
     }
     closeModal(){
         this.setState(state =>({
-            user : this.state.user,
             ModalOpen : false
         }))
     }
@@ -56,8 +54,7 @@ class Account extends Component {
                                     </Button>
                                 </p>
                                 <p>
-                                    This is a useless biography. Please for a good biography go to facebook or instagram bcz we
-                                    dont care abt you mfs yeah!
+                                    Here goes biography
                                 </p>
                             </center>
                         </Col>

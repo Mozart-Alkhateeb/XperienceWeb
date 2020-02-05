@@ -17,7 +17,7 @@ class TopNavbar extends Component {
     }
     render() {
         return (
-            <Navbar bg="dark" variant="dark" style={{ height: "4rem" }}>
+            <Navbar bg="dark" variant="dark" style={{ height: "4rem"}}>
                 <Navbar.Brand>Xperience</Navbar.Brand>
                 <Nav className='mr-auto'>
                     <Nav.Link><Icon name="feed" />Feeds</Nav.Link>

@@ -22,12 +22,6 @@ class EditAccount extends Component {
         }
     }
 
-    change(open) {
-        this.setState(state => ({
-            isOpen: open
-        }))
-    }
-
     onMultiSelect(selectedList, selectedItem) {
 
     }
@@ -43,7 +37,7 @@ class EditAccount extends Component {
                     size="md"
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
-                    show={this.state.isOpen}
+                    show={this.props.isOpen}
                 >
                     <Modal.Header>
                         <Modal.Title><Icon name='user' />Edit User</Modal.Title>
@@ -80,7 +74,7 @@ class EditAccount extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button>Save</Button>
-                        <Button className="btn-danger">Cancel</Button>
+                        <Button className="btn-danger" onClick={this.props.closeModal}>Cancel</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
