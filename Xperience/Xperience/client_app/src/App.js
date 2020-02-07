@@ -1,18 +1,47 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Sidebar from 'react-sidebar'
+import Root from './root'
+import Account from './Pages/account'
+import Register from './Pages/register'
+import Index from './Pages/index'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import Login from './Pages/login';
+import EditAccount from './Pages/EditAccount'
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 class App extends Component {
+    constructor() {
+        super();
+        this.state = {
+            sidebarOpen: false
+        }
+    }
+
     render() {
         return <div>
-            <Sidebar
-                sidebar = {<b>Sidebar Content</b>}
-                styles={{ sidebar: { background: "black", width: "20%", color:"white" } }}
-                open={true}
-            >
-            </Sidebar>
-            
+
+            <Router>
+                <Switch>
+                    <Route exact path={"/"}>
+                        <Redirect to={"/register"} />
+                    </Route>
+                    <Route path={"/account"}>
+                        <Root />
+                        <Account />
+                    </Route>
+                    <Route path={"/register"}>
+                        <Index>
+                            <Register />
+                        </Index>
+                    </Route>
+                    <Route path={"/login"}>
+                        <Index>
+                            <Login />
+                        </Index>
+                    </Route>
+                </Switch>
+            </Router>
         </div>
     }
 }

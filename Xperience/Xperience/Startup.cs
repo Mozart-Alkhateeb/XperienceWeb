@@ -154,7 +154,9 @@ namespace Xperience
 
 
 
-            app.UseSpaStaticFiles();
+            if (!env.IsDevelopment()) {
+                app.UseSpaStaticFiles();
+            }
 
 
 
