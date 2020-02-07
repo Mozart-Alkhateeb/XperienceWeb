@@ -17,6 +17,7 @@ namespace Xperience.Data.Entities.Users
         public DateTime DateOfBirth { get; set; }
         public string Gender { get; set; }
 
+        //public string Ext { get; set; }
         public string Info { get; set; }
 
         #region F.K
@@ -69,6 +70,7 @@ namespace Xperience.Data.Entities.Users
 
         public ICollection<Tag> Tags { get; set; }
         public ICollection<Tag> TaggedBy { get; set; }
+    
         #endregion
     }
 
